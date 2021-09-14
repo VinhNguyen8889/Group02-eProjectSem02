@@ -33,6 +33,9 @@ class AdminUserController extends Controller
         $data = User::find(Auth::user()->id);
         $data->name = $request->name;
         $data->email = $request->email;
+        $data->address = $request->address;
+        $data->mobile = $request->mobile;
+        $data->gender = $request->gender;
         
         if($request->file('profile_photo_path')){
             $file = $request->file('profile_photo_path');
@@ -84,4 +87,80 @@ class AdminUserController extends Controller
             }
 
         }
+
+        // Manage USERs
+
+    public function AllUser(){
+    	$data['allData'] = User::where('usertype','Admin')->get();
+    	return view('backend/user/all_user',$data);
+    }
+
+    public function AddUser(){
+    	return view('backend/user/add_user');
+    }
+
+    public function StoreUser(Request $request){
+
+    	$validatedData = $request->validate([
+    		'email' => 'required|unique:users',
+    		'name' => 'required',
+            'role' => 'required',
+    	]);
+
+    	$data = new User();
+        $code = rand(0000,9999);
+    	$data->usertype = 'Admin';
+        $data->role = $request->role;
+    	$data->name = $request->name;
+    	$data->email = $request->email;
+    	$data->password = bcrypt($code);
+        $data->code = $code;
+    	$data->save();
+
+    	$notification = array(
+    		'message' => 'User Inserted Successfully',
+    		'alert-type' => 'success'
+    	);
+
+    	return redirect()->route('all.user')->with($notification);
+
+    }
+
+
+    public function EditUser($id){
+        $data = User::findOrFail($id);
+    	return view('backend/user/edit_user', compact('data'));
+    }
+
+    public function UpdateUser(Request $request, $id){
+
+    	$data = User::findOrFail($id);
+    	$data->name = $request->name;
+    	$data->email = $request->email;
+        $data->role = $request->role;
+    	$data->save();
+
+    	$notification = array(
+    		'message' => 'User Updated Successfully',
+    		'alert-type' => 'info'
+    	);
+
+    	return redirect()->route('all.user')->with($notification);
+
+    }
+
+
+    public function DeleteUSer($id){
+    	$user = User::findOrFail($id);
+    	$user->delete();
+
+    	$notification = array(
+    		'message' => 'User Deleted Successfully',
+    		'alert-type' => 'info'
+    	);
+
+    	return redirect()->route('all.user')->with($notification);
+
+    }
+
 }

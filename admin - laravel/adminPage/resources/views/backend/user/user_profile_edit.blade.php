@@ -24,13 +24,50 @@
                                 <div class="basic-form">
                                     <form method="post" action="{{route('user.profile.store')}}" enctype="multipart/form-data">
                                         @csrf
+                                        <div class="row">
+                                            <div class="col-md-6">
                                         <div class="form-group">
+                                            <label for="name">User Name</label>
                                             <input type="text" name="name" class="form-control input-default " value="{{$result->name}}">
                                         </div>
+                                        </div>
+                                        <div class="col-md-6">
                                         <div class="form-group">
+                                            <label for="name">Email</label>
                                             <input type="email" name="email" class="form-control input-default " value="{{$result->email}}">
                                         </div>
-                                        <div class="input-group mb-3">
+                                        </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="mobile">User Mobile</label>
+                                            <input type="text" name="mobile" class="form-control input-default " value="{{$result->mobile}}">
+                                        </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="address">User Address</label>
+                                            <input type="text" name="address" class="form-control input-default " value="{{$result->address}}">
+                                        </div>
+                                        </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="gender">Gender</label>
+                                            <input type="text" name="gender" class="form-control input-default " value="{{$result->gender}}">
+                                        </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+
+                                        
+                                        <div class="form-group">
+                                          <label for="gender">Profile Image</label>
+                                          <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Upload</span>
                                             </div>
@@ -39,10 +76,15 @@
                                                 <label class="custom-file-label">Choose file</label>
                                             </div>
                                         </div>
+                                        </div>
 
                                         <div class="form-group">
                                         <img id="showImage" src="{{(!empty($result->profile_photo_path))?url('upload/user_images/'.$result->profile_photo_path):url('upload/no_image.jpg')}}" class="img-fluid rounded-circle" alt="" style="width:100px;height:100px">
                                         </div>
+                                        </div>
+                                        </div>
+
+
 
                                         <input type="submit" class="btn btn-success" value ="Update Profile">
 

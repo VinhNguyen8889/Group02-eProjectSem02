@@ -10,10 +10,19 @@
 <!-- Favicon icon -->
 <link rel="icon" type="image/png" sizes="16x16" href="{{asset('backend/images/favicon.png')}}">
 <link rel="stylesheet" href="{{asset('backend//vendor/chartist/css/chartist.min.css')}}">
+
+<!-- Datatable -->
+<link href="{{asset('backend/vendor/datatables/css/jquery.dataTables.min.css')}}" rel="stylesheet">
+
+
+
 <link href="{{asset('backend/vendor/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet">
 <link href="{{asset('backend/vendor/owl-carousel/owl.carousel.css')}}" rel="stylesheet">
 <link href="{{asset('backend/css/style.css')}}" rel="stylesheet">
 
+
+
+<!-- Toastr -->
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
 
 
@@ -119,10 +128,48 @@ Scripts
 <script src="{{asset('backend/js/custom.min.js')}}"></script>
 <script src="{{asset('backend/js/deznav-init.js')}}"></script>
 
+    <!-- Datatable -->
+    <script src="{{asset('backend/vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('backend/js/plugins-init/datatables.init.js')}}"></script>
+
+<!-- Sweet Alert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<script type="text/javascript">
+  $(function(){
+    $(document).on('click','#delete',function(e){
+        e.preventDefault();
+        var link = $(this).attr("href");
+
+  
+                  Swal.fire({
+                    title: 'Are you sure?',
+                    text: "Delete This Data?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      window.location.href = link
+                      Swal.fire(
+                        'Be patient!',
+                        'Your request is being processed!',
+                        'info'
+                      )
+                    }
+                  }) 
 
 
+    });
+
+  });
 
 
+</script> 
+
+<!-- Toastr -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 <script>

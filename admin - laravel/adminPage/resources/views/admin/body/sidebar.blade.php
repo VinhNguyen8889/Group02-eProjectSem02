@@ -1,8 +1,9 @@
 <div class="deznav">
 <div class="deznav-scroll">
+<ul class="metismenu" id="menu">
     <div class="card">
         <div class="card-body">
-        <div id="accordion-seven" class="accordion accordion-header-bg accordion-bordered">
+        <div id="accordion-seven" class="accordion-active-header">
                 <div class="accordion__item">
                 <div class="accordion__header accordion__header--primary collapsed" data-toggle="collapse" data-target="#header-bg_collapseOne" aria-expanded="false">
                 <span class="accordion__header--icon"></span>
@@ -10,7 +11,7 @@
                 <span class="accordion__header--indicator"></span>
                 </div>
                 <div id="header-bg_collapseOne" class="accordion__body collapse" data-parent="#accordion-seven" style="">
-                <ul class="metismenu" id="menu">
+
                 <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                 <i class="flaticon-144-layout"></i>
                 <span class="nav-text">Dashboard</span>
@@ -31,8 +32,14 @@
                 </ul>
                 </li>
 
+                @if(Auth::user()->role == 'Admin')
+                <li><a class="has-arrow ai-icon" href="{{route('all.user')}}" aria-expanded="false">
+                <i class="flaticon-028-user-1"></i>
+                <span class="nav-text">Manage Users</span>
+                </a>
+                </li>
+                @endif
 
-                </ul>	
                 </div>
                 </div>
 
@@ -44,19 +51,54 @@
                 <span class="accordion__header--indicator"></span>
                 </div>
                 <div id="header-bg_collapseTwo" class="collapse accordion__body" data-parent="#accordion-seven">
-                <ul class="metismenu" id="menu1">
-                <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+
+                <li><a href="{{route('all.information')}}">
                 <i class="flaticon-056-information"></i>
                 <span class="nav-text">Information</span>
                 </a>
-                <ul aria-expanded="false">
-                <li><a href="{{route('all.information')}}">All Information</a></li>
-                <li><a href="{{route('add.information')}}">Add Information</a></li>
-                </ul>
                 </li>
 
+                <li><a href="{{route('all.service')}}">
+                <i class="flaticon-143-idea"></i>
+                <span class="nav-text">Service</span>
+                </a>
+                </li>
 
-                </ul>	
+                <li><a href="{{route('all.project')}}">
+                <i class="flaticon-032-briefcase"></i>
+                <span class="nav-text">Project</span>
+                </a>
+                </li>
+
+                <li><a href="{{route('all.course')}}">
+                <i class="flaticon-009-share"></i>
+                <span class="nav-text">Course</span>
+                </a>
+                </li>
+
+                <li><a href="{{route('all.home')}}">
+                <i class="flaticon-141-home"></i>
+                <span class="nav-text">Home Content</span>
+                </a>
+                </li>
+
+                <li><a href="{{route('all.review')}}">
+                <i class="flaticon-029-star"></i>
+                <span class="nav-text">Client Review</span>
+                </a>
+                </li>
+
+                <li><a href="{{route('all.footer')}}">
+                <i class="flaticon-097-pin"></i>
+                <span class="nav-text">Footer</span>
+                </a>
+                </li>
+
+                <li><a href="{{route('all.chart')}}">
+                <i class="flaticon-004-bar-chart"></i>
+                <span class="nav-text">Chart</span>
+                </a>
+                </li>
                 </div>
                 </div>
 
@@ -64,40 +106,100 @@
                 <div class="accordion__item">
                 <div class="accordion__header collapsed accordion__header--success" data-toggle="collapse" data-target="#header-bg_collapseThree">
                 <span class="accordion__header--icon"></span>
-                <span class="accordion__header--text">School Management</span>
+                <span class="accordion__header--text">Course & Fee Setup</span>
                 <span class="accordion__header--indicator"></span>
                 </div>
                 <div id="header-bg_collapseThree" class="collapse accordion__body" data-parent="#accordion-seven">
-                <ul class="metismenu" id="menu">
-                <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                <i class="flaticon-144-layout"></i>
-                <span class="nav-text">Dashboard</span>
+
+                <li><a href="{{route('all.class')}}">
+                <i class="flaticon-004-bar-chart"></i>
+                <span class="nav-text">Class</span>
                 </a>
-                <ul aria-expanded="false">
-                <li><a href="index.html">Dashboard</a></li>
-                </ul>
+                </li>
+
+                <li><a href="{{route('all.year')}}">
+                <i class="flaticon-004-bar-chart"></i>
+                <span class="nav-text">Year</span>
+                </a>
+                </li>
+
+                <li><a href="{{route('all.group')}}">
+                <i class="flaticon-004-bar-chart"></i>
+                <span class="nav-text">Group</span>
+                </a>
+                </li>
+
+                <li><a href="{{route('all.shift')}}">
+                <i class="flaticon-004-bar-chart"></i>
+                <span class="nav-text">Shift</span>
+                </a>
+                </li>
+
+                <li><a href="{{route('all.fee_category')}}">
+                <i class="flaticon-004-bar-chart"></i>
+                <span class="nav-text">Fee Category</span>
+                </a>
+                </li>
+
+                <li><a href="{{route('all.fee_amount')}}">
+                <i class="flaticon-004-bar-chart"></i>
+                <span class="nav-text">Fee Amount</span>
+                </a>
+                </li>
+
+                <li><a href="{{route('all.exam_type')}}">
+                <i class="flaticon-004-bar-chart"></i>
+                <span class="nav-text">Exam Type</span>
+                </a>
+                </li>
+
+                <li><a href="{{route('all.school_subject')}}">
+                <i class="flaticon-004-bar-chart"></i>
+                <span class="nav-text">School Subject</span>
+                </a>
                 </li>
 
 
-        <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-        <i class="flaticon-077-menu-1"></i>
-        <span class="nav-text">User Profile</span>
-        </a>
-        <ul aria-expanded="false">
-        <li><a href="{{route('user.profile')}}">User Profile</a></li>
-        <li><a href="{{route('password.edit')}}">Change Password</a></li>
-        </ul>
-        </li>
+
+                <li><a href="{{route('all.assign_subject')}}">
+                <i class="flaticon-004-bar-chart"></i>
+                <span class="nav-text">Assign Subject</span>
+                </a>
+                </li>
+
+                <li><a href="{{route('all.job_title')}}">
+                <i class="flaticon-004-bar-chart"></i>
+                <span class="nav-text">Job Title</span>
+                </a>
+                </li>
 
 
-        </ul>	
         </div>
         </div>
+
+        <div class="accordion__item">
+                <div class="accordion__header collapsed accordion__header--success" data-toggle="collapse" data-target="#header-bg_collapseFour">
+                <span class="accordion__header--icon"></span>
+                <span class="accordion__header--text">Student Management</span>
+                <span class="accordion__header--indicator"></span>
+                </div>
+                <div id="header-bg_collapseFour" class="collapse accordion__body" data-parent="#accordion-seven">
+
+                <li><a href="{{route('all.student_reg')}}">
+                <i class="flaticon-004-bar-chart"></i>
+                <span class="nav-text">Student Registration</span>
+                </a>
+                </li>
+
+                </div>
+        </div>
+
+        
         </div>
         </div>
     </div>
 
-
+    </ul>	
 
 <div class="copyright">
 <p><strong>PP4E Admin Dashboard</strong> © 2021 All Rights Reserved</p>
@@ -105,4 +207,3 @@
 </div>
 </div>
 </div>
-

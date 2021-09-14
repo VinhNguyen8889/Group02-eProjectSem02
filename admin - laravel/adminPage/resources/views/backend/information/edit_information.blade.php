@@ -1,9 +1,13 @@
 @extends('admin.admin_master')
 
 @section('summernote')
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script> -->
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 @endsection
 
 
@@ -15,7 +19,10 @@
                 <!-- row -->
                 <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Add Information</h4>
+                                <h4 class="card-title">Update Information</h4>
+                                <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                            <a href="{{route('all.information')}}"><button type="button" class="btn btn-secondary">Go Back</button></a>
+                    </div>
                             </div>
                             <div class="card-body">
                                 <div class="basic-form">

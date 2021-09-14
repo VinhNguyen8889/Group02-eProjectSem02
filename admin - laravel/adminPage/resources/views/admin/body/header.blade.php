@@ -7,9 +7,9 @@ Nav header start
 </a>
 
 <div class="nav-control">
-<div class="hamburger">
+<!-- <div class="hamburger">
 <span class="line"></span><span class="line"></span><span class="line"></span>
-</div>
+</div> -->
 </div>
 </div>
 <!--**********************************
