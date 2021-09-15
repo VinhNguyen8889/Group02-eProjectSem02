@@ -22,6 +22,7 @@ class CreateAssignStudentsTable extends Migration
             $table->integer('group_id')->nullable();
             $table->integer('shift_id')->nullable();
             $table->timestamps();
+            $table->foreign('student_id')->references('id')->on('users');
         });
     }
 

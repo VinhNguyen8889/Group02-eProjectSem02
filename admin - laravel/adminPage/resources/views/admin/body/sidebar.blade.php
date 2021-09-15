@@ -194,6 +194,23 @@
                 </div>
         </div>
 
+        <div class="accordion__item">
+                <div class="accordion__header collapsed accordion__header--success" data-toggle="collapse" data-target="#header-bg_collapseFour">
+                <span class="accordion__header--icon"></span>
+                <span class="accordion__header--text">Employee Management</span>
+                <span class="accordion__header--indicator"></span>
+                </div>
+                <div id="header-bg_collapseFour" class="collapse accordion__body" data-parent="#accordion-seven">
+
+                <li><a href="{{route('all.student_reg')}}">
+                <i class="flaticon-004-bar-chart"></i>
+                <span class="nav-text">Employee Registration</span>
+                </a>
+                </li>
+
+                </div>
+        </div>
+
         
         </div>
         </div>

@@ -33,7 +33,9 @@
 <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Year</th>
 <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Class</th>
 <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Image</th>
+@if(Auth::user()->role == "Admin")
 <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Code</th>
+@endif
 <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Action</th>
 </thead>
 <tbody>
@@ -42,16 +44,16 @@
 <tr role="row" class="{{$key%2?'even':'odd'}}">
 <td class="sorting_1"><img class="rounded-circle" width="35" src="images/profile/small/pic1.jpg" alt="">{{ $key+1 }}</td>
 <td>{{ $value['student']['name'] }}</td>
-<td>{{ $value['student']['name'] }}</td>
-<td>{{ $value['student']['name'] }}</td>
-<td>{{ $value['student']['name'] }}</td>
-<td>{{ $value['student']['name'] }}</td>
-<td>{{ $value['student']['name'] }}</td>
-<td>{{ $value['student']['name'] }}</td>
+<td>{{ $value['student']['id_no'] }}</td>
+<td>{{ $value->roll }}</td>
+<td>{{ $value['student_year']['name'] }}</td>
+<td>{{ $value['student_class']['name'] }}</td>
+<td> <img src="{{ (!empty($value['student']['profile_photo_path']))? url('upload/student_images/'.$value['student']['profile_photo_path']):url('upload/no_image.jpg') }}" style="width: 60px; width: 60px;"> </td>
+<td>{{ $value['student']['code'] }}</td>
 <td>
 <div class="d-flex">
-<a href="{{route('edit.year',$year->id)}}" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-<a href="{{route('delete.year',$year->id)}}" class="btn btn-danger shadow btn-xs sharp" id="delete"><i class="fa fa-trash"></i></a>
+<a href="{{route('edit.student_reg',$value->student_id)}}" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
+<a href="{{route('delete.year',$value->student_id)}}" class="btn btn-danger shadow btn-xs sharp" id="delete"><i class="fa fa-trash"></i></a>
 </div>												
 </td>												
 </tr>

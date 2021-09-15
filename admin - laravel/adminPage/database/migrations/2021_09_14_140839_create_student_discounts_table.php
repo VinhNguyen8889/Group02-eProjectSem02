@@ -19,6 +19,7 @@ class CreateStudentDiscountsTable extends Migration
             $table->integer('fee_category_id')->nullable();
             $table->double('discount')->nullable();
             $table->timestamps();
+            $table->foreign('assign_student_id')->references('id')->on('assign_students');
         });
     }
 

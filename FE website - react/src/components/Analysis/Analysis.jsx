@@ -38,19 +38,15 @@ class Analysis extends Component {
                  <ResponsiveContainer>   
                <BarChart width={100} height={300} data={this.state.myData}>
                
-               <XAxis dataKey="Technology" /> 
+               <XAxis dataKey="y_data" /> 
                <Tooltip />
-               <Bar dataKey="Projects" fill={blue}>
+               <Bar dataKey="x_data" fill={blue}>
 
                </Bar>
                </BarChart>
                </ResponsiveContainer>
                
             </Col>
-
-
-
-
                
                <Col lg={6} md={12} sm={12}>
      <p className="text-justify serviceDescription">{ReactHtmlParser(this.state.techDes)}</p>

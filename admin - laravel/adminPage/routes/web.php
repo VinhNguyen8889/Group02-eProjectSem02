@@ -23,7 +23,6 @@ use App\Http\Controllers\School\Setup\JobTitleController;
 use App\Http\Controllers\School\Setup\SchoolSubjectController;
 use App\Http\Controllers\School\Student\StudentRegController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -253,10 +252,10 @@ Route::prefix('school/setup/assign_subject')->group(function(){
 Route::prefix('students')->group(function(){
     Route::get('/reg/view', [StudentRegController::class, 'StudentRegView'])->name('all.student_reg');
     Route::get('/reg/add', [StudentRegController::class, 'StudentRegAdd'])->name('add.student_reg');
-    // Route::post('/reg/store', [StudentRegController::class, 'StudentRegStore'])->name('store.student.registration');
+    Route::post('/reg/store', [StudentRegController::class, 'StudentRegStore'])->name('store.student_reg');
     // Route::get('/year/class/wise', [StudentRegController::class, 'StudentClassYearWise'])->name('student.year.class.wise');
-    // Route::get('/reg/edit/{student_id}', [StudentRegController::class, 'StudentRegEdit'])->name('student.registration.edit');
-    // Route::post('/reg/update/{student_id}', [StudentRegController::class, 'StudentRegUpdate'])->name('update.student.registration');
+    Route::get('/reg/edit/{student_id}', [StudentRegController::class, 'StudentRegEdit'])->name('edit.student_reg');
+    Route::post('/reg/update/{student_id}', [StudentRegController::class, 'StudentRegUpdate'])->name('update.student_reg');
     // Route::get('/reg/promotion/{student_id}', [StudentRegController::class, 'StudentRegPromotion'])->name('student.registration.promotion');
     // Route::post('/reg/update/promotion/{student_id}', [StudentRegController::class, 'StudentUpdatePromotion'])->name('promotion.student.registration');
     // Route::get('/reg/details/{student_id}', [StudentRegController::class, 'StudentRegDetails'])->name('student.registration.details');

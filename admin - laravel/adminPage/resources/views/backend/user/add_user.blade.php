@@ -7,9 +7,9 @@
                 <!-- row -->
                 <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">User Profile Edit</h4>
+                                <h4 class="card-title">Add New User</h4>
                                 <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-                            <a href="{{route('all.user')}}"><button type="button" class="btn btn-secondary">Add New User</button></a>
+                            <a href="{{route('all.user')}}"><button type="button" class="btn btn-secondary">Back</button></a>
                     </div>
                             </div>
                             <div class="card-body">
