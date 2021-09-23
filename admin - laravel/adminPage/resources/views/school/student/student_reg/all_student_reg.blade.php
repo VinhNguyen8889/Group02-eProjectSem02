@@ -52,7 +52,7 @@
 <a href="{{route('edit.student_reg',$student->id)}}" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
 <a href="{{route('delete.student_reg',$student->id)}}" class="btn btn-danger shadow btn-xs sharp mr-1" id="delete"><i class="fa fa-trash"></i></a>
 <a href="{{route('add.student_class_reg',$student->id)}}" class="btn btn-info shadow btn-xs sharp mr-1"><i class="flaticon-043-plus"></i></a>
-<a href="{{route('view.student_reg')}}" class="btn btn-success shadow btn-xs sharp"><i class="flaticon-057-eye"></i></a>
+<a href="{{route('view.student_class_list',$student->id)}}" class="btn btn-success shadow btn-xs sharp"><i class="flaticon-057-eye"></i></a>
 
 </div>												
 </td>												

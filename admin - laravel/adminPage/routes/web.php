@@ -260,9 +260,9 @@ Route::prefix('students')->group(function(){
     Route::get('/reg/student/subject/{subject_id}', [StudentRegController::class, 'GetClassReg'])->name('add.student_class_reg.get_class');
     Route::get('/reg/student/subject/class/{class_id}', [StudentRegController::class, 'GetTransaction'])->name('add.student_class_reg.get_transaction');
     Route::get('/reg/student/subject/class/voucher/{voucher_id}', [StudentRegController::class, 'GetVoucher']);
-
     Route::post('/reg/all/store}', [StudentRegController::class, 'AllRegStore'])->name('store.all.reg');
     Route::get('/reg/all/student/view', [StudentRegController::class, 'AllRegView'])->name('view.student_reg');
+    Route::get('/reg/student/class/{student_id}', [StudentRegController::class, 'ViewStudentClassList'])->name('view.student_class_list');
 
 
 
@@ -278,4 +278,6 @@ Route::prefix('students/management')->group(function(){
     Route::get('/studentlist/class/{class_id}', [StudentManagementController::class, 'DetailClastList'])->name('detail.class_list');
     Route::get('/studentlist/mark/add/{class_id}', [StudentManagementController::class, 'AddMark'])->name('add.mark');
     Route::post('/studentlist/mark/store/{class_id}', [StudentManagementController::class, 'StoreMark'])->name('store.mark');
+    Route::get('/student/class', [StudentManagementController::class, 'StudentClastList'])->name('student.class_list');
+
 });

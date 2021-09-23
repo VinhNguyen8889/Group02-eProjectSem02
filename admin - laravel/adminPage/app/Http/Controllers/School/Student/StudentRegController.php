@@ -195,35 +195,29 @@ public function AllRegStore(Request $request){
 
 
 
-	$date = date('Ymd');
+	$thisYear = date('Y');
+	$thisMonth = date('m');
 
-	$student = User::where('usertype','Student')->orderBy('id','DESC')->first();
+	$curReg = StudentReg::whereYear('created_at',$thisYear)->whereMonth('created_at',$thisMonth)->orderBy('created_at','DESC')->first();
 
-	if ($student == null) {
-		$firstReg = 0;
-		$studentId = $firstReg+1;
-		if ($studentId < 10) {
-			$id_no = '000'.$studentId;
-		}elseif ($studentId < 100) {
-			$id_no = '00'.$studentId;
-		}elseif ($studentId < 1000) {
-			$id_no = '0'.$studentId;
-		}
+	if ($curReg == null) {
+		$id = $firstReg+1;
+		$id_temp = "000".$id;
+
 	}else{
- $student = User::where('usertype','Student')->orderBy('id','DESC')->first()->id_no;
-	 $studentId = substr($student,4,4) +1;
-	 if ($studentId < 10) {
-			$id_no = '000'.$studentId;
-		}elseif ($studentId < 100) {
-			$id_no = '00'.$studentId;
-		}elseif ($studentId < 1000) {
-			$id_no = '0'.$studentId;
+		$curID = $curReg->id_no;
+		$id = substr($curID,6,4) +1;
+	 if ($id < 10) {
+			$id_temp = '000'.$id;
+		}elseif ($id < 100) {
+			$id_temp = '00'.$id;
+		}elseif ($id < 1000) {
+			$id_temp = '0'.$id;
 		}
 
 	} // end else 
-	$checkYear = date('Y');
 
-	$final_id_no = $checkYear.$id_no;
+	$final_id_no = $thisYear.$thisMonth.$id_temp;
 
 	$newReg->id_no = $final_id_no;
 
@@ -244,4 +238,10 @@ public function AllRegView(){
 	return view('school.student.student_reg.view_all_reg',$data);
 }
 
+public function ViewStudentClassList($student_id){
+
+	$data['regs'] = StudentReg::where('student_id',$student_id)->get();
+
+return view('school.student.student_reg.view_student_class_list',$data);
+}
 }

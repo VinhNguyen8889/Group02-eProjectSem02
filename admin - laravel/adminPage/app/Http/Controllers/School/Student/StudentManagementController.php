@@ -60,5 +60,12 @@ $countClass = count($request->mark);
     return redirect()->route('detail.class_list',$class_id)->with($notification);
 } // end Method 
 
+public function StudentClastList(){
+
+        $student_id = Auth::user()->id;
+        $data['regs'] = StudentReg::where('student_id',$student_id)->get();
+
+    return view('school.student.student_management.student_class_list',$data);
+}
 
 }

@@ -207,18 +207,21 @@
                 </div>
                 <div id="header-bg_collapseFive" class="collapse accordion__body" data-parent="#accordion-seven">
 
+                @if(Auth::user()->role !== 'Student')
                 <li><a href="{{route('all.class_list')}}">
                 <i class="flaticon-004-bar-chart"></i>
                 <span class="nav-text">Student List</span>
                 </a>
                 </li>
-
-                <li><a href="{{route('all.student_reg')}}">
+                @endif
+                
+                @if(Auth::user()->role == 'Student')
+                <li><a href="{{route('student.class_list')}}">
                 <i class="flaticon-004-bar-chart"></i>
                 <span class="nav-text">Student Study Record</span>
                 </a>
                 </li>
-
+                @endif
 
 
                 </div>

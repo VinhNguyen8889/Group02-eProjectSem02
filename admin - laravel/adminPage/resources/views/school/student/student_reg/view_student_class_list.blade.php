@@ -14,13 +14,7 @@
             <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title"> <strong>Class:</strong> <span class="text-info">{{$class->name}}</span> </h4>
-                                <h5 class="card-title"><strong>Teacher:</strong> <span class="text-info">{{$class['class_teacher']['name']}}</span></h5>
-
-                                <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-                                <a href="{{route('add.mark',$class->id)}}" ><button type="button" class="btn btn-primary mr-3">Update Mark</button></a>
-                            <a href="{{route('all.class_list')}}"><button type="button" class="btn btn-secondary">Back</button></a>
-                    </div>
+                                <h4 class="card-title">Class List</h4>
                             </div>
 
                             <div class="card-body">
@@ -31,25 +25,26 @@
 <thead> 
 <tr role="row" class="bg bg-success">
 <th class="sorting_asc" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-sort="ascending" aria-label=": activate to sort column descending" >#</th>
-<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" >Student Name</th>
-<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >DOB</th>
-<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Mobile</th>
-<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Email</th>
+<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" >Class Name</th>
+<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Subject</th>
+<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Study Day</th>
+<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Shift</th>
+<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Planned Start Day</th>
+<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Teacher</th>
 <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Mark</th>
 </thead>
 <tbody>
 
-@foreach($students as $key=>$student)                             
+@foreach($regs as $key=>$reg)                             
 <tr role="row">
 <td>{{$key+1}}</td>
-<td>{{$student['student']['name']}}</td>
-<td>{{$student['student']['dob']}}</td>
-<td>{{$student['student']['mobile']}}</td>
-<td>{{$student['student']['email']}}</td>
-<td>{{$student->mark}}</td>
-<td>
-												
-</td>												
+<td>{{$reg['class']['name']}}</td>
+<td>{{$reg['class']['class_subject']['name']}}</td>
+<td>{{$reg['class']['class_day']['name']}}</td>
+<td>{{$reg['class']['class_shift']['name']}}</td>
+<td>{{$reg['class']['planned_start_date']}}</td>
+<td>{{$reg['class']['class_teacher']['name']}}</td>
+<td>{{$reg['mark']}}</td>											
 </tr>
 @endforeach
 

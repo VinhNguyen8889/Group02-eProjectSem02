@@ -43,7 +43,7 @@
 
 @foreach($regs as $key=>$reg)                             
 <tr role="row">
-<td>{{$key+1}}</td>
+<td>{{$reg['id_no']}}</td>
 <td>{{$reg['student']['name']}}</td>
 <td>{{date('Y-m-d',strtotime($reg->created_at))}}</td>
 <td>{{$reg['class']['name']}}</td>
