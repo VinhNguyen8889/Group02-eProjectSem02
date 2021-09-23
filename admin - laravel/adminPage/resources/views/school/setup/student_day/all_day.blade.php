@@ -14,9 +14,9 @@
             <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Class Database</h4>
+                                <h4 class="card-title">Class Day Datatable</h4>
                                 <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-                            <a href="{{route('add.class')}}"><button type="button" class="btn btn-secondary">Add New Class</button></a>
+                            <a href="{{route('add.day')}}"><button type="button" class="btn btn-secondary">Add Day Combo</button></a>
                     </div>
                             </div>
                             <div class="card-body">
@@ -27,27 +27,21 @@
 <thead> 
 <tr role="row" class="bg bg-success">
 <th class="sorting_asc" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-sort="ascending" aria-label=": activate to sort column descending" >#</th>
-<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" >Class Name</th>
-<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" >Class Teacher</th>
-<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" >Planned Start Day</th>
-<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" >Fee Amount</th>
-
-
+<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" >Day Combo</th>
+<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" >Short Code</th>
 <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Action</th>
 </thead>
 <tbody>
 
-@foreach($allData as $key => $class )                                           
+@foreach($allData as $key => $day )                                           
 <tr role="row" class="{{$key%2?'even':'odd'}}">
 <td class="sorting_1"><img class="rounded-circle" width="35" src="images/profile/small/pic1.jpg" alt="">{{ $key+1 }}</td>
-<td>{{ $class->name }}</td>
-<td>{{ $class['class_teacher']['name'] }}</td>
-<td>{{ $class->planned_start_date }}</td>
-<td>{{ $class->applied_fee }}</td>
+<td>{{ $day->name }}</td>
+<td>{{ $day->short_code }}</td>
 <td>
 <div class="d-flex">
-<a href="{{route('all.class',$class->id)}}" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-<a href="{{route('delete.class',$class->id)}}" class="btn btn-danger shadow btn-xs sharp" id="delete"><i class="fa fa-trash"></i></a>
+<a href="{{route('edit.day',$day->id)}}" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
+<a href="{{route('delete.day',$day->id)}}" class="btn btn-danger shadow btn-xs sharp" id="delete"><i class="fa fa-trash"></i></a>
 </div>												
 </td>												
 </tr>

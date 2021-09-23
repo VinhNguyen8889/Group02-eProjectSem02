@@ -36,6 +36,14 @@
                                             @enderror
                                         </div>
 
+                                        <div class="form-group">
+                                            <label class="info-title">Short Code</label>
+                                            <input type="text" name="short_code" class="form-control input-default" value="{{$data->short_code}}">
+                                            @error('short_code')
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                        </div>
+
                                         <input type="submit" class="btn btn-success" value ="Update Shift">
 
                                     </form>

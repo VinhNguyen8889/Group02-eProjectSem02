@@ -14,9 +14,11 @@
             <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Student List</h4>
+                                <h4 class="card-title"> <strong>Class:</strong> <span class="text-info">{{$class->name}}</span> </h4>
+                                <h5 class="card-title"><strong>Teacher:</strong> <span class="text-info">{{$class['class_teacher']['name']}}</span></h5>
+
                                 <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-                            <a href="{{route('add.student_reg')}}"><button type="button" class="btn btn-secondary">New Student</button></a>
+                            <a href="{{route('detail.class_list',$class->id)}}"><button type="button" class="btn btn-secondary">Back</button></a>
                     </div>
                             </div>
 
@@ -28,44 +30,42 @@
 <thead> 
 <tr role="row" class="bg bg-success">
 <th class="sorting_asc" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-sort="ascending" aria-label=": activate to sort column descending" >#</th>
-<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" >Name</th>
+<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" >Student Name</th>
 <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >DOB</th>
-<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Gender</th>
 <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Mobile</th>
 <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Email</th>
-<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Student ID</th>
-<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Action</th>
+<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Mark</th>
 </thead>
-<tbody>
-
-@foreach($students as $key=>$student)                             
+<form method="post" action="{{ route('store.mark',$class->id) }}">
+	 	@csrf
+@foreach($students as $key=>$student)   
+<tbody>                   
 <tr role="row">
 <td>{{$key+1}}</td>
-<td>{{$student->name}}</td>
-<td>{{$student->dob}}</td>
-<td>{{$student->gender}}</td>
-<td>{{$student->mobile}}</td>
-<td>{{$student->email}}</td>
-<td>{{$student->id_no}}</td>
+<td>{{$student['student']['name']}}</td>
+<td>{{$student['student']['dob']}}</td>
+<td>{{$student['student']['mobile']}}</td>
+<td>{{$student['student']['email']}}</td>
 <td>
-<div class="d-flex">
-<a href="{{route('edit.student_reg',$student->id)}}" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-<a href="{{route('delete.student_reg',$student->id)}}" class="btn btn-danger shadow btn-xs sharp mr-1" id="delete"><i class="fa fa-trash"></i></a>
-<a href="{{route('add.student_class_reg',$student->id)}}" class="btn btn-info shadow btn-xs sharp mr-1"><i class="flaticon-043-plus"></i></a>
-<a href="{{route('view.student_reg')}}" class="btn btn-success shadow btn-xs sharp"><i class="flaticon-057-eye"></i></a>
-
-</div>												
+    <input type="text" name="mark[]" value="{{$student->mark}}">
+</td>
+<td>
+												
 </td>												
 </tr>
+<input type="text" name="student_id[]" value="{{$student->id}}" hidden>
 @endforeach
-
 </tbody>
+
 </table>
 
                                     <div class="dataTables_paginate paging_simple_numbers" id="example3_paginate">
                                 </div>
                             </div>
                                 </div>
+
+<input type="submit" class="btn btn-success" value="Submit Mark">
+</form>
                             </div>
                         </div>
                     </div>

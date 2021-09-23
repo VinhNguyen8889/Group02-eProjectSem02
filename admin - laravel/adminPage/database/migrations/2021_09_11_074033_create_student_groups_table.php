@@ -16,6 +16,7 @@ class CreateStudentGroupsTable extends Migration
         Schema::create('student_groups', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
+            $table->string('short_code')->unique();
             $table->timestamps();
         });
     }

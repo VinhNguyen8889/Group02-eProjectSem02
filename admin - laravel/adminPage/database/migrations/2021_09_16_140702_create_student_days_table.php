@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFeeCategoriesTable extends Migration
+class CreateStudentDaysTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateFeeCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('fee_categories', function (Blueprint $table) {
+        Schema::create('student_days', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
+            $table->string('short_code')->unique();
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateFeeCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fee_categories');
+        Schema::dropIfExists('student_days');
     }
 }

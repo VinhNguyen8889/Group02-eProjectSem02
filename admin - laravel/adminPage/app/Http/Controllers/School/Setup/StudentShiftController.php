@@ -23,10 +23,12 @@ class StudentShiftController extends Controller
 
     	$validatedData = $request->validate([
     		'name' => 'required|unique:student_shifts,name',
+			'short_code' => 'required|unique:student_shifts,short_code',
     	]);
 
     	$data = new StudentShift();
     	$data->name = $request->name;
+		$data->short_code = $request->short_code;
     	$data->save();
 
     	$notification = array(
@@ -52,12 +54,13 @@ class StudentShiftController extends Controller
 		$data = StudentShift::find($id);
      
      $validatedData = $request->validate([
-    		'name' => 'required|unique:student_shifts,name,'.$data->id
-    		
+    		'name' => 'required|unique:student_shifts,name,'.$data->id,
+			'short_code' => 'required|unique:student_shifts,short_code,'.$data->id,
     	]);
 
     	
     	$data->name = $request->name;
+		$data->short_code = $request->short_code;
     	$data->save();
 
     	$notification = array(
@@ -70,6 +73,8 @@ class StudentShiftController extends Controller
 
 
     public function DeleteStudentShift($id){
+
+		try {
     	$user = StudentShift::find($id);
     	$user->delete();
 
@@ -79,6 +84,16 @@ class StudentShiftController extends Controller
     	);
 
     	return redirect()->route('all.shift')->with($notification);
+	} catch (\Illuminate\Database\QueryException $e) {
+		//   var_dump($e->errorInfo);
+		$notification = array(
+			'message' => 'Cannot delete the data with associated records.',
+			'alert-type' => 'error'
+		);
+
+		return redirect()->back()->with($notification);
+
+	  }
 
     }
 }

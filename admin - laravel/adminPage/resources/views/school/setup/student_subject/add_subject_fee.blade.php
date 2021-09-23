@@ -19,32 +19,34 @@
                 <!-- row -->
                 <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Update Group</h4>
+                                <h4 class="card-title">Add New Fee Amount for <strong class="text-primary">{{$subject->name}}</strong></h4>
                                 <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-                            <a href="{{route('all.group')}}"><button type="button" class="btn btn-secondary">Go Back</button></a>
+                            <a href="{{route('all.subject_fee',$subject->id)}}"><button type="button" class="btn btn-secondary">Go Back</button></a>
                     </div>
                             </div>
                             <div class="card-body">
                                 <div class="basic-form">
-                                    <form method="post" action="{{route('update.group',$data->id)}}" enctype="multipart/form-data">
+                                    <form method="post" action="{{route('store.subject_fee')}}" enctype="multipart/form-data">
                                         @csrf
+                                        <input type="hidden" name="subject_id" value="{{$subject->id}}">
+
                                         <div class="form-group">
-                                            <label class="info-title">Group</label>
-                                            <input type="text" name="name" class="form-control input-default" value="{{$data->name}}">
-                                            @error('name')
+                                            <label class="info-title">Fee Amount</label>
+                                            <input type="number" name="fee_amount" class="form-control input-default">
+                                            @error('fee_amount')
                                             <span class="text-danger">{{$message}}</span>
                                             @enderror
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="info-title">Short Code</label>
-                                            <input type="text" name="short_code" class="form-control input-default" value="{{$data->short_code}}">
-                                            @error('short_code')
+                                            <label class="info-title">Effective Date</label>
+                                            <input type="date" name="effective_date" class="form-control input-default">
+                                            @error('effective_date')
                                             <span class="text-danger">{{$message}}</span>
                                             @enderror
                                         </div>
 
-                                        <input type="submit" class="btn btn-success" value ="Update Group">
+                                        <input type="submit" class="btn btn-success" value ="Add New Fee">
 
                                     </form>
                                 </div>

@@ -19,17 +19,17 @@
                 <!-- row -->
                 <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Update Group</h4>
+                                <h4 class="card-title">Update Day Combo</h4>
                                 <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-                            <a href="{{route('all.group')}}"><button type="button" class="btn btn-secondary">Go Back</button></a>
+                            <a href="{{route('all.day')}}"><button type="button" class="btn btn-secondary">Go Back</button></a>
                     </div>
                             </div>
                             <div class="card-body">
                                 <div class="basic-form">
-                                    <form method="post" action="{{route('update.group',$data->id)}}" enctype="multipart/form-data">
+                                    <form method="post" action="{{route('update.day',$data->id)}}" enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-group">
-                                            <label class="info-title">Group</label>
+                                            <label class="info-title">Day Combo</label>
                                             <input type="text" name="name" class="form-control input-default" value="{{$data->name}}">
                                             @error('name')
                                             <span class="text-danger">{{$message}}</span>
@@ -44,7 +44,7 @@
                                             @enderror
                                         </div>
 
-                                        <input type="submit" class="btn btn-success" value ="Update Group">
+                                        <input type="submit" class="btn btn-success" value ="Update Day">
 
                                     </form>
                                 </div>

@@ -14,41 +14,47 @@
             <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Shift Database</h4>
+                                <h4 class="card-title"> <strong>Class:</strong> <span class="text-info">{{$class->name}}</span> </h4>
+                                <h5 class="card-title"><strong>Teacher:</strong> <span class="text-info">{{$class['class_teacher']['name']}}</span></h5>
+
                                 <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-                            <a href="{{route('add.shift')}}"><button type="button" class="btn btn-secondary">Add Shift</button></a>
+                            <a href="{{route('all.class_list')}}"><button type="button" class="btn btn-secondary">Back</button></a>
                     </div>
                             </div>
+
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <div id="example3_wrapper" class="dataTables_wrapper no-footer">
-
+	
                                             <table id="example3" class="display dataTable no-footer" style="min-width: 845px" role="grid" aria-describedby="example3_info">
 <thead> 
 <tr role="row" class="bg bg-success">
 <th class="sorting_asc" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-sort="ascending" aria-label=": activate to sort column descending" >#</th>
-<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" >Name</th>
-<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" >Short Code</th>
-<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Action</th>
+<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" >Student Name</th>
+<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >DOB</th>
+<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Mobile</th>
+<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Email</th>
+<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Mark</th>
 </thead>
 <tbody>
 
-@foreach($allData as $key => $shift )                                           
-<tr role="row" class="{{$key%2?'even':'odd'}}">
-<td class="sorting_1"><img class="rounded-circle" width="35" src="images/profile/small/pic1.jpg" alt="">{{ $key+1 }}</td>
-<td>{{ $shift->name }}</td>
-<td>{{ $shift->short_code }}</td>
+@foreach($students as $key=>$student)                             
+<tr role="row">
+<td>{{$key+1}}</td>
+<td>{{$student['student']['name']}}</td>
+<td>{{$student['student']['dob']}}</td>
+<td>{{$student['student']['mobile']}}</td>
+<td>{{$student['student']['email']}}</td>
+<td>{{$student->mark}}</td>
 <td>
-<div class="d-flex">
-<a href="{{route('edit.shift',$shift->id)}}" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-<a href="{{route('delete.shift',$shift->id)}}" class="btn btn-danger shadow btn-xs sharp" id="delete"><i class="fa fa-trash"></i></a>
-</div>												
+												
 </td>												
 </tr>
 @endforeach
 
 </tbody>
 </table>
+
                                     <div class="dataTables_paginate paging_simple_numbers" id="example3_paginate">
                                 </div>
                             </div>

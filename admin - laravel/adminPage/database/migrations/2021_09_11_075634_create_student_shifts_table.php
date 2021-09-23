@@ -16,6 +16,7 @@ class CreateStudentShiftsTable extends Migration
         Schema::create('student_shifts', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
+            $table->string('short_code')->unique();
             $table->timestamps();
         });
     }

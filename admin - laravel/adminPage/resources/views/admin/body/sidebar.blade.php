@@ -111,17 +111,20 @@
                 </div>
                 <div id="header-bg_collapseThree" class="collapse accordion__body" data-parent="#accordion-seven">
 
-                <li><a href="{{route('all.class')}}">
-                <i class="flaticon-004-bar-chart"></i>
-                <span class="nav-text">Class</span>
-                </a>
-                </li>
 
                 <li><a href="{{route('all.year')}}">
                 <i class="flaticon-004-bar-chart"></i>
                 <span class="nav-text">Year</span>
                 </a>
                 </li>
+
+                <li><a href="{{route('all.day')}}">
+                <i class="flaticon-004-bar-chart"></i>
+                <span class="nav-text">Day Combo</span>
+                </a>
+                </li>
+
+
 
                 <li><a href="{{route('all.group')}}">
                 <i class="flaticon-004-bar-chart"></i>
@@ -135,17 +138,24 @@
                 </a>
                 </li>
 
-                <li><a href="{{route('all.fee_category')}}">
+                <li><a href="{{route('all.subject')}}">
                 <i class="flaticon-004-bar-chart"></i>
-                <span class="nav-text">Fee Category</span>
+                <span class="nav-text">Subject</span>
                 </a>
                 </li>
 
-                <li><a href="{{route('all.fee_amount')}}">
+                <li><a href="{{route('all.class')}}">
                 <i class="flaticon-004-bar-chart"></i>
-                <span class="nav-text">Fee Amount</span>
+                <span class="nav-text">Class</span>
                 </a>
                 </li>
+
+                <li><a href="{{route('all.coupon')}}">
+                <i class="flaticon-004-bar-chart"></i>
+                <span class="nav-text">Coupon</span>
+                </a>
+                </li>
+
 
                 <li><a href="{{route('all.exam_type')}}">
                 <i class="flaticon-004-bar-chart"></i>
@@ -153,19 +163,6 @@
                 </a>
                 </li>
 
-                <li><a href="{{route('all.school_subject')}}">
-                <i class="flaticon-004-bar-chart"></i>
-                <span class="nav-text">School Subject</span>
-                </a>
-                </li>
-
-
-
-                <li><a href="{{route('all.assign_subject')}}">
-                <i class="flaticon-004-bar-chart"></i>
-                <span class="nav-text">Assign Subject</span>
-                </a>
-                </li>
 
                 <li><a href="{{route('all.job_title')}}">
                 <i class="flaticon-004-bar-chart"></i>
@@ -180,7 +177,7 @@
         <div class="accordion__item">
                 <div class="accordion__header collapsed accordion__header--success" data-toggle="collapse" data-target="#header-bg_collapseFour">
                 <span class="accordion__header--icon"></span>
-                <span class="accordion__header--text">Student Management</span>
+                <span class="accordion__header--text">Registration Management</span>
                 <span class="accordion__header--indicator"></span>
                 </div>
                 <div id="header-bg_collapseFour" class="collapse accordion__body" data-parent="#accordion-seven">
@@ -191,22 +188,38 @@
                 </a>
                 </li>
 
+                <li><a href="{{route('view.student_reg')}}">
+                <i class="flaticon-004-bar-chart"></i>
+                <span class="nav-text">Transaction List</span>
+                </a>
+                </li>
+
+
+
                 </div>
         </div>
 
         <div class="accordion__item">
-                <div class="accordion__header collapsed accordion__header--success" data-toggle="collapse" data-target="#header-bg_collapseFour">
+                <div class="accordion__header collapsed accordion__header--success" data-toggle="collapse" data-target="#header-bg_collapseFive">
                 <span class="accordion__header--icon"></span>
-                <span class="accordion__header--text">Employee Management</span>
+                <span class="accordion__header--text">Student Management</span>
                 <span class="accordion__header--indicator"></span>
                 </div>
-                <div id="header-bg_collapseFour" class="collapse accordion__body" data-parent="#accordion-seven">
+                <div id="header-bg_collapseFive" class="collapse accordion__body" data-parent="#accordion-seven">
+
+                <li><a href="{{route('all.class_list')}}">
+                <i class="flaticon-004-bar-chart"></i>
+                <span class="nav-text">Student List</span>
+                </a>
+                </li>
 
                 <li><a href="{{route('all.student_reg')}}">
                 <i class="flaticon-004-bar-chart"></i>
-                <span class="nav-text">Employee Registration</span>
+                <span class="nav-text">Student Study Record</span>
                 </a>
                 </li>
+
+
 
                 </div>
         </div>

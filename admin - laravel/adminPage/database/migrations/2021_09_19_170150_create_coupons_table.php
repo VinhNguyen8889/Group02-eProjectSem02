@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSchoolSubjectsTable extends Migration
+class CreateCouponsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,14 @@ class CreateSchoolSubjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('school_subjects', function (Blueprint $table) {
+        Schema::create('coupons', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('coupon_name');
+            $table->string('coupon_type');
+            $table->double('coupon_discount');
+            $table->date('valid_from');
+            $table->date('valid_to');
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }
@@ -27,6 +32,6 @@ class CreateSchoolSubjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('school_subjects');
+        Schema::dropIfExists('coupons');
     }
 }

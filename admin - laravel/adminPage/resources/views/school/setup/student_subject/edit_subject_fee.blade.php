@@ -19,24 +19,34 @@
                 <!-- row -->
                 <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Add School Subject</h4>
+                                <h4 class="card-title">Update Fee Amount for <strong class="text-primary">AA</strong></h4>
                                 <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-                            <a href="{{route('all.school_subject')}}"><button type="button" class="btn btn-secondary">Go Back</button></a>
+                            <a href=""><button type="button" class="btn btn-secondary">Go Back</button></a>
                     </div>
                             </div>
                             <div class="card-body">
                                 <div class="basic-form">
-                                    <form method="post" action="{{route('store.school_subject')}}" enctype="multipart/form-data">
+                                    <form method="post" action="" enctype="multipart/form-data">
                                         @csrf
+                          
+
                                         <div class="form-group">
-                                            <label class="info-title">School Subject Name</label>
-                                            <input type="text" name="name" class="form-control input-default">
-                                            @error('name')
+                                            <label class="info-title">Fee Amount</label>
+                                            <input type="number" name="fee_amount" class="form-control input-default" value="{{$feeData->fee_amount}}">
+                                            @error('fee_amount')
                                             <span class="text-danger">{{$message}}</span>
                                             @enderror
                                         </div>
 
-                                        <input type="submit" class="btn btn-success" value ="Add School Subject">
+                                        <div class="form-group">
+                                            <label class="info-title">Effective Date</label>
+                                            <input type="date" name="effective_date" class="form-control input-default" value="{{$feeData->effective_date}}">
+                                            @error('effective_date')
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                        </div>
+
+                                        <input type="submit" class="btn btn-success" value ="Add New Fee">
 
                                     </form>
                                 </div>

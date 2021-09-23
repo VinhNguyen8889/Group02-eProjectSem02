@@ -4,41 +4,56 @@ namespace App\Http\Controllers\School\Student;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\AssignStudent;
 use App\Models\User;
-use App\Models\StudentDiscount;
-use App\Models\StudentYear;
 use App\Models\StudentClass;
-use App\Models\StudentGroup;
-use App\Models\StudentShift;
+use App\Models\StudentReg;
+use App\Models\StudentSubject;
+use App\Models\Coupon;
 use DB;
 
 class StudentRegController extends Controller
 {
     public function StudentRegView(){
-    	$data['years'] = StudentYear::all();
-    	$data['classes'] = StudentClass::all();
 
-    	$data['year_id'] = StudentYear::orderBy('id','desc')->first()->id;
-    	$data['class_id'] = StudentClass::orderBy('id','desc')->first()->id;
-    	// dd($data['class_id']);
-    	$data['allData'] = AssignStudent::where('year_id',$data['year_id'])->where('class_id',$data['class_id'])->get();
+    	$data['students'] = User::where('role','Student')->orderBy('created_at','DESC')->get();
+
     	return view('school.student.student_reg.all_student_reg',$data);
     }
 
+	public function StudentRegDelete($id){
+		try{
+    	$data = User::findOrFail($id);
+		$data->delete();
+
+		$notification = array(
+    		'message' => 'Student Account has been deleted Successfully',
+    		'alert-type' => 'info'
+    	);
+
+    	return redirect()->route('all.student_reg')->with($notification);
+	} catch (\Illuminate\Database\QueryException $e) {
+		//   var_dump($e->errorInfo);
+		$notification = array(
+			'message' => 'Cannot delete the data with associated records.',
+			'alert-type' => 'error'
+		);
+
+		return redirect()->back()->with($notification);
+
+	  }
+    }
+    
+
 
     public function StudentRegAdd(){
-    	$data['years'] = StudentYear::all();
-    	$data['classes'] = StudentClass::all();
-    	$data['groups'] = StudentGroup::all();
-    	$data['shifts'] = StudentShift::all();
-    	return view('school.student.student_reg.add_student_reg',$data);
+    	return view('school.student.student_reg.add_student_reg');
     }
 
 
         public function StudentRegStore(Request $request){
     	DB::transaction(function() use($request){
-    	$checkYear = StudentYear::find($request->year_id)->name;
+			$checkYear = date('Y');
+
     	$student = User::where('usertype','Student')->orderBy('id','DESC')->first();
 
     	if ($student == null) {
@@ -52,8 +67,8 @@ class StudentRegController extends Controller
     			$id_no = '0'.$studentId;
     		}
     	}else{
-     $student = User::where('usertype','Student')->orderBy('id','DESC')->first()->id;
-     	$studentId = $student+1;
+     $student = User::where('usertype','Student')->orderBy('id','DESC')->first()->id_no;
+     	$studentId = substr($student,4,4) +1;
      	if ($studentId < 10) {
     			$id_no = '000'.$studentId;
     		}elseif ($studentId < 100) {
@@ -66,40 +81,20 @@ class StudentRegController extends Controller
 
     	$final_id_no = $checkYear.$id_no;
     	$user = new User();
-    	$code = rand(0000,9999);
+    	$code = 'Welcome'.date('Ymd',strtotime($request->dob));
     	$user->id_no = $final_id_no;
     	$user->password = bcrypt($code);
     	$user->usertype = 'Student';
+		$user->role = 'Student';
     	$user->code = $code;
     	$user->name = $request->name;
-    	$user->fname = $request->fname;
-    	$user->mname = $request->mname;
+		$user->email = $request->email;
     	$user->mobile = $request->mobile;
     	$user->address = $request->address;
     	$user->gender = $request->gender;
     	$user->dob = date('Y-m-d',strtotime($request->dob));
 
-    	if ($request->file('profile_photo_path')) {
-    		$file = $request->file('profile_photo_path');
-    		$filename = date('YmdHi').$file->getClientOriginalName();
-    		$file->move(public_path('upload/student_images'),$filename);
-    		$user['profile_photo_path'] = $filename;
-    	}
  	    $user->save();
-
-          $assign_student = new AssignStudent();
-          $assign_student->student_id = $user->id;
-          $assign_student->year_id = $request->year_id;
-          $assign_student->class_id = $request->class_id;
-          $assign_student->group_id = $request->group_id;
-          $assign_student->shift_id = $request->shift_id;
-          $assign_student->save();
-
-          $discount_student = new StudentDiscount();
-          $discount_student->assign_student_id = $assign_student->id;
-          $discount_student->fee_category_id = '1';
-          $discount_student->discount = $request->discount;
-          $discount_student->save();
 
     	});
 
@@ -112,51 +107,26 @@ class StudentRegController extends Controller
 }
 
 
-public function StudentRegEdit($student_id){
-    $data['years'] = StudentYear::all();
-    $data['classes'] = StudentClass::all();
-    $data['groups'] = StudentGroup::all();
-    $data['shifts'] = StudentShift::all();
+public function StudentRegEdit($id){
+    $student = User::findOrFail($id);
 
-    $data['editData'] = AssignStudent::with(['student','discount'])->where('student_id',$student_id)->first();
-    return view('school.student.student_reg.edit_student_reg',$data);
+    return view('school.student.student_reg.edit_student_reg',compact('student'));
 
 }
 
 
-public function StudentRegUpdate(Request $request,$student_id){
-    DB::transaction(function() use($request,$student_id){
+public function StudentRegUpdate(Request $request,$id){
+    DB::transaction(function() use($request,$id){
 
-    $user = User::where('id',$student_id)->first();    	 
+    $user = User::where('id',$id)->first();    	 
     $user->name = $request->name;
-    $user->fname = $request->fname;
-    $user->mname = $request->mname;
     $user->mobile = $request->mobile;
     $user->address = $request->address;
     $user->gender = $request->gender;
+	$user->email = $request->email;
     $user->dob = date('Y-m-d',strtotime($request->dob));
 
-    if ($request->file('profile_photo_path')) {
-        $file = $request->file('profile_photo_path');
-        @unlink(public_path('upload/student_images/'.$user->profile_photo_path));
-        $filename = date('YmdHi').$file->getClientOriginalName();
-        $file->move(public_path('upload/student_images'),$filename);
-        $user['profile_photo_path'] = $filename;
-    }
      $user->save();
-
-      $assign_student = AssignStudent::where('id',$request->id)->where('student_id',$student_id)->first();
-       
-      $assign_student->year_id = $request->year_id;
-      $assign_student->class_id = $request->class_id;
-      $assign_student->group_id = $request->group_id;
-      $assign_student->shift_id = $request->shift_id;
-      $assign_student->save();
-
-      $discount_student = StudentDiscount::where('assign_student_id',$request->id)->first();
-     
-      $discount_student->discount = $request->discount;
-      $discount_student->save();
 
     });
 
@@ -173,5 +143,105 @@ public function StudentRegUpdate(Request $request,$student_id){
 
 
 
+
+
+public function StudentClassRegAdd($id){
+
+	$data['student'] = User::findOrFail($id);
+	$data['subjects'] = StudentSubject::all();
+	$today = date('Y-m-d');
+	$data['vouchers'] = Coupon::where('status',1)->where('valid_from','<=',$today)->where('valid_to','>=',$today)->latest()->get();
+
+	return view('school.student.student_reg.add_student_class_reg',$data);
+}
+
+public function GetClassReg($subject_id){
+
+	$class = StudentClass::where('subject_id',$subject_id)->latest()->get();
+	return json_encode($class);
+}
+
+public function GetTransaction($class_id){
+	$fee = StudentClass::findOrFail($class_id);
+	return json_encode($fee);
+}
+
+public function GetVoucher($voucher_id){
+	$voucher = Coupon::findOrFail($voucher_id);
+	return json_encode($voucher);
+
+}
+
+
+public function AllRegStore(Request $request){
+
+
+	$validatedData = $request->validate([
+		'payment' => 'required',
+		'reg_class_id' => 'required|unique:student_regs,class_id,NULL,id,student_id,'.$request->reg_student_id,
+	]);
+
+	
+	$newReg = new StudentReg();
+
+	$newReg->student_id = $request->reg_student_id;
+	$newReg->class_id = $request->reg_class_id;
+	$newReg->voucher_name = $request->reg_coupon_name;
+	$newReg->value = $request->reg_value;
+	$newReg->discount_amount = $request->reg_discount_amount;
+	$newReg->paid = $request->reg_paid;
+	$newReg->fee_amount = $request->reg_fee_amount;
+	$newReg->payment = $request->payment;
+
+
+
+	$date = date('Ymd');
+
+	$student = User::where('usertype','Student')->orderBy('id','DESC')->first();
+
+	if ($student == null) {
+		$firstReg = 0;
+		$studentId = $firstReg+1;
+		if ($studentId < 10) {
+			$id_no = '000'.$studentId;
+		}elseif ($studentId < 100) {
+			$id_no = '00'.$studentId;
+		}elseif ($studentId < 1000) {
+			$id_no = '0'.$studentId;
+		}
+	}else{
+ $student = User::where('usertype','Student')->orderBy('id','DESC')->first()->id_no;
+	 $studentId = substr($student,4,4) +1;
+	 if ($studentId < 10) {
+			$id_no = '000'.$studentId;
+		}elseif ($studentId < 100) {
+			$id_no = '00'.$studentId;
+		}elseif ($studentId < 1000) {
+			$id_no = '0'.$studentId;
+		}
+
+	} // end else 
+	$checkYear = date('Y');
+
+	$final_id_no = $checkYear.$id_no;
+
+	$newReg->id_no = $final_id_no;
+
+	$newReg->save();
+
+	$notification = array(
+		'message' => 'Class Registration Updated Successfully',
+		'alert-type' => 'success'
+	);
+
+	return redirect()->route('all.student_reg')->with($notification);
+}
+
+
+public function AllRegView(){
+	$data['regs']= StudentReg::all();
+
+	return view('school.student.student_reg.view_all_reg',$data);
+}
 
 }

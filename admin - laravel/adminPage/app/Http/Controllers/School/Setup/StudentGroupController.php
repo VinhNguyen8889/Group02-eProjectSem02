@@ -23,10 +23,12 @@ class StudentGroupController extends Controller
 
     	$validatedData = $request->validate([
     		'name' => 'required|unique:student_groups,name',
+			'short_code' => 'required|unique:student_groups,short_code'
     	]);
 
     	$data = new StudentGroup();
     	$data->name = $request->name;
+		$data->short_code = $request->short_code;
     	$data->save();
 
     	$notification = array(
@@ -52,12 +54,13 @@ class StudentGroupController extends Controller
 		$data = StudentGroup::find($id);
      
      $validatedData = $request->validate([
-    		'name' => 'required|unique:student_groups,name,'.$data->id
-    		
+    		'name' => 'required|unique:student_groups,name,'.$data->id,
+    		'short_code' => 'required|unique:student_groups,short_code,'.$data->id,
     	]);
 
     	
     	$data->name = $request->name;
+		$data->short_code = $request->short_code;
     	$data->save();
 
     	$notification = array(
