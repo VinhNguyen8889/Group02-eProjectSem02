@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateJobTitlesTable extends Migration
+class CreateLevelTeachersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateJobTitlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('job_titles', function (Blueprint $table) {
+        Schema::create('level_teachers', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->double('basic_salary');
+            $table->integer('name');
+            $table->double('increment_salary');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateJobTitlesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('job_titles');
+        Schema::dropIfExists('level_teachers');
     }
 }

@@ -14,10 +14,7 @@
             <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Job Title Datatable</h4>
-                                <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-                            <a href="{{route('add.job_title')}}"><button type="button" class="btn btn-secondary">Add Job Title</button></a>
-                    </div>
+                                <h4 class="card-title">Employee Salary Database</h4>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -28,19 +25,24 @@
 <tr role="row" class="bg bg-success">
 <th class="sorting_asc" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-sort="ascending" aria-label=": activate to sort column descending" >#</th>
 <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" >Name</th>
-<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" >Basic Salary</th>
-<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Action</th>
+<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="ID No: activate to sort column ascending" >ID No</th>
+<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="ID No: activate to sort column ascending" >Level</th>
+<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" >Basic Salary</th>
+<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Action: activate to sort column ascending" >Action</th>
 </thead>
 <tbody>
 
-@foreach($allData as $key => $jobTitle)                                           
+@foreach($allData as $key => $value )                                           
 <tr role="row" class="{{$key%2?'even':'odd'}}">
-<td class="sorting_1"><img class="rounded-circle" width="35">{{ $key+1 }}</td>
-<td>{{ $jobTitle->name }}</td>
-<td>{{ $jobTitle->basic_salary }}</td>
+<td class="sorting_1"><img class="rounded-circle" width="35" src="images/profile/small/pic1.jpg" alt="">{{ $key+1 }}</td>
+<td>{{ $value -> name }}</td>
+<td>{{ $value -> id_no }}</td>
+<td>Level {{ $value -> religion }}</td>
+<td>{{ $value -> salary }}</td>
 <td>
 <div class="d-flex">
-<a href="{{route('edit.job_title',$jobTitle->id)}}" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
+<a href="{{route('add.employee_salary',$value->id)}}" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-plus-square"></i></a>
+<a href="{{route('details.employee_salary',$value->id)}}" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-eye"></i></a>
 </div>												
 </td>												
 </tr>

@@ -170,6 +170,12 @@
                 </a>
                 </li>
 
+                <li><a href="{{route('all.teacher_level')}}">
+                <i class="flaticon-004-bar-chart"></i>
+                <span class="nav-text">Teacher Level</span>
+                </a>
+                </li>
+
 
         </div>
         </div>
@@ -227,6 +233,40 @@
                 </div>
         </div>
 
+        <div class="accordion__item">
+                <div class="accordion__header collapsed accordion__header--success" data-toggle="collapse" data-target="#header-bg_collapseSix">
+                <span class="accordion__header--icon"></span>
+                <span class="accordion__header--text">Employee Management</span>
+                <span class="accordion__header--indicator"></span>
+                </div>
+                <div id="header-bg_collapseSix" class="collapse accordion__body" data-parent="#accordion-seven">
+
+                <li><a href="{{route('all.employee_reg')}}">
+                <i class="flaticon-004-bar-chart"></i>
+                <span class="nav-text">Employee Registration</span>
+                </a>
+                </li>
+
+                <li><a href="{{route('all.employee_salary')}}">
+                <i class="flaticon-004-bar-chart"></i>
+                <span class="nav-text">Employee Salary</span>
+                </a>
+                </li>
+
+                <li><a href="{{route('all.employee_attendance')}}">
+                <i class="flaticon-004-bar-chart"></i>
+                <span class="nav-text">Employee Attendance</span>
+                </a>
+                </li>
+
+                <li><a href="{{route('get.monthly_salary')}}">
+                <i class="flaticon-004-bar-chart"></i>
+                <span class="nav-text">Employee Monthly Salary</span>
+                </a>
+                </li>
+                </div>
+        </div>
+        
         
         </div>
         </div>

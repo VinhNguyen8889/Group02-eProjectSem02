@@ -35,7 +35,13 @@
                                             <span class="text-danger">{{$message}}</span>
                                             @enderror
                                         </div>
-
+                                        <div class="form-group">
+                                            <label class="info-title">Basic Salary</label>
+                                            <input type="text" name="basic_salary" class="form-control input-default">
+                                            @error('basic_salary')
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                        </div>
                                         <input type="submit" class="btn btn-success" value ="Add Job Title">
 
                                     </form>

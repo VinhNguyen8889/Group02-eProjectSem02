@@ -19,30 +19,30 @@
                 <!-- row -->
                 <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Update Job Title</h4>
+                                <h4 class="card-title">Add Teacher Level</h4>
                                 <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-                            <a href="{{route('all.job_title')}}"><button type="button" class="btn btn-secondary">Go Back</button></a>
+                            <a href="{{route('all.teacher_level')}}"><button type="button" class="btn btn-secondary">Go Back</button></a>
                     </div>
                             </div>
                             <div class="card-body">
                                 <div class="basic-form">
-                                    <form method="post" action="{{route('update.job_title',$data->id)}}" enctype="multipart/form-data">
+                                    <form method="post" action="{{route('store.teacher_level')}}" enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-group">
-                                            <label class="info-title">Job Title Name</label>
-                                            <input type="text" name="name" class="form-control input-default" value="{{$data->name}}">
+                                            <label class="info-title">Level Name</label>
+                                            <input type="number" name="name" class="form-control input-default">
                                             @error('name')
                                             <span class="text-danger">{{$message}}</span>
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label class="info-title">Basic Salary</label>
-                                            <input type="text" name="basic_salary" class="form-control input-default">
-                                            @error('basic salary')
+                                            <label class="info-title">Increment Salary</label>
+                                            <input type="text" name="increment_salary" class="form-control input-default">
+                                            @error('increment_salary')
                                             <span class="text-danger">{{$message}}</span>
                                             @enderror
                                         </div>
-                                        <input type="submit" class="btn btn-success" value ="Update Job Title">
+                                        <input type="submit" class="btn btn-success" value ="Add Teacher Level">
 
                                     </form>
                                 </div>

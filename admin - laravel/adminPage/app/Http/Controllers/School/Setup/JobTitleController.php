@@ -23,11 +23,12 @@ class JobTitleController extends Controller
 
     	$validatedData = $request->validate([
     		'name' => 'required|unique:job_titles,name',
-    		
+    		'basic_salary' => 'required|numeric'
     	]);
 
     	$data = new JobTitle();
-    	$data->name = $request->name;
+    	$data->name = trim($request->name);
+		$data->basic_salary = $request->basic_salary;
     	$data->save();
 
     	$notification = array(
@@ -53,12 +54,13 @@ class JobTitleController extends Controller
 		$data = JobTitle::find($id);
      
         $validatedData = $request->validate([
-    		'name' => 'required|unique:job_titles,name,'.$data->id
-    		
+    		'name' => 'required|unique:job_titles,name,'.$data->id,
+    		'basic_salary' => 'required'
     	]);
 
     	
     	$data->name = $request->name;
+		$data->basic_salary = $request->basic_salary;
     	$data->save();
 
     	$notification = array(
@@ -69,17 +71,4 @@ class JobTitleController extends Controller
     	return redirect()->route('all.job_title')->with($notification);
     }
 
-
-    public function DeleteJobTitle($id){
-    	$user = JobTitle::find($id);
-    	$user->delete();
-
-    	$notification = array(
-    		'message' => 'Job Title Deleted Successfully',
-    		'alert-type' => 'info'
-    	);
-
-    	return redirect()->route('all.job_title')->with($notification);
-
-    }
 }

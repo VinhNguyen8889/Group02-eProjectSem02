@@ -22,7 +22,11 @@ use App\Http\Controllers\School\Setup\ExamTypeController;
 use App\Http\Controllers\School\Setup\JobTitleController;
 use App\Http\Controllers\School\Student\StudentRegController;
 use App\Http\Controllers\School\Student\StudentManagementController;
-
+use App\Http\Controllers\School\Setup\LevelTeacherController;
+use App\Http\Controllers\School\Employee\EmployeeAttendanceController;
+use App\Http\Controllers\School\Employee\EmployeeSalaryController;
+use App\Http\Controllers\School\Employee\EmployeeRegController;
+use App\Http\Controllers\School\Employee\MonthlySalaryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -227,6 +231,15 @@ Route::prefix('school/setup/job_title')->group(function(){
     Route::get('/delete/{id}',[JobTitleController::class, 'DeleteJobTitle'])->name('delete.job_title');
 });
 
+// Teacher Level
+Route::prefix('school/setup/teacher_level')->group(function(){
+    Route::get('/all',[LevelTeacherController::class, 'AllLevelTeacher'])->name('all.teacher_level');
+    Route::get('/add',[LevelTeacherController::class, 'AddLevelTeacher'])->name('add.teacher_level');
+    Route::post('/store',[LevelTeacherController::class, 'StoreLevelTeacher'])->name('store.teacher_level');
+    Route::get('/edit/{id}',[LevelTeacherController::class, 'EditLevelTeacher'])->name('edit.teacher_level');
+    Route::post('/update/{id}',[LevelTeacherController::class, 'UpdateLevelTeacher'])->name('update.teacher_level');
+});
+
 // Exam Type
 Route::prefix('school/setup/exam_type')->group(function(){
     Route::get('/all',[ExamTypeController::class, 'AllExamType'])->name('all.exam_type');
@@ -263,11 +276,6 @@ Route::prefix('students')->group(function(){
     Route::post('/reg/all/store}', [StudentRegController::class, 'AllRegStore'])->name('store.all.reg');
     Route::get('/reg/all/student/view', [StudentRegController::class, 'AllRegView'])->name('view.student_reg');
     Route::get('/reg/student/class/{student_id}', [StudentRegController::class, 'ViewStudentClassList'])->name('view.student_class_list');
-
-
-
-    
-    // Route::get('/reg/details/{student_id}', [StudentRegController::class, 'StudentRegDetails'])->name('student.registration.details');
 });
 
 
@@ -280,4 +288,38 @@ Route::prefix('students/management')->group(function(){
     Route::post('/studentlist/mark/store/{class_id}', [StudentManagementController::class, 'StoreMark'])->name('store.mark');
     Route::get('/student/class', [StudentManagementController::class, 'StudentClastList'])->name('student.class_list');
 
+});
+
+/// Employee Registration
+Route::prefix('employees')->group(function(){
+    Route::get('/reg/all', [EmployeeRegController::class, 'EmployeeRegAll'])->name('all.employee_reg');
+    Route::get('/reg/delete/{id}',[EmployeeRegController::class, 'EmployeeRegDelete'])->name('delete.employee_reg');
+    Route::get('/reg/add', [EmployeeRegController::class, 'EmployeeRegAdd'])->name('add.employee_reg');
+    Route::post('/reg/store', [EmployeeRegController::class, 'EmployeeRegStore'])->name('store.employee_reg');
+    Route::get('/reg/edit/{id}', [EmployeeRegController::class, 'EmployeeRegEdit'])->name('edit.employee_reg');
+    Route::post('/reg/update/{id}', [EmployeeRegController::class, 'EmployeeRegUpdate'])->name('update.employee_reg');
+});
+
+/// Employee Salary
+Route::prefix('employees')->group(function(){
+    Route::get('/salary/all', [EmployeeSalaryController::class, 'EmployeeSalaryAll'])->name('all.employee_salary');
+    Route::get('/salary/add/{id}', [EmployeeSalaryController::class, 'EmployeeSalaryIncrement'])->name('add.employee_salary');
+    Route::post('/salary/store/{id}', [EmployeeSalaryController::class, 'EmployeeSalaryStore'])->name('store.employee_salary');
+    Route::get('/salary/details/{id}', [EmployeeSalaryController::class, 'EmployeeSalaryDetails'])->name('details.employee_salary');
+});
+
+/// Employee Attendance
+Route::prefix('employees')->group(function(){
+    Route::get('/attendance/all', [EmployeeAttendanceController::class, 'EmployeeAttendanceAll'])->name('all.employee_attendance');
+    Route::get('/attendance/add', [EmployeeAttendanceController::class, 'EmployeeAttendanceAdd'])->name('add.employee_attendance');
+    Route::post('/attendance/store', [EmployeeAttendanceController::class, 'EmployeeAttendanceStore'])->name('store.employee_attendance');
+    Route::get('/attendance/edit/{date}', [EmployeeAttendanceController::class, 'EmployeeAttendanceEdit'])->name('edit.employee_attendance');
+    Route::post('/attendance/update/{date}', [EmployeeAttendanceController::class, 'EmployeeAttendanceUpdate'])->name('update.employee_attendance');
+    Route::get('/attendance/details/{date}', [EmployeeAttendanceController::class, 'EmployeeAttendanceDetails'])->name('details.employee_attendance');
+});
+
+/// Employee Monthly Salary1
+Route::prefix('employees')->group(function(){
+    Route::get('/monthly_salary/get', [MonthlySalaryController::class, 'GetMonthlySalary'])->name('get.monthly_salary');
+    Route::get('/monthly_salary/details', [MonthlySalaryController::class, 'DetailsMonthlySalary'])->name('details.monthly_salary');
 });

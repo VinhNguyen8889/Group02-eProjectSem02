@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateJobTitlesTable extends Migration
+class CreateEmployeeAttendancesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateJobTitlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('job_titles', function (Blueprint $table) {
+        Schema::create('employee_attendances', function (Blueprint $table) {
+
             $table->id();
-            $table->string('name')->unique();
-            $table->double('basic_salary');
+            $table->unsignedBigInteger('employee_id')->comment('employee_id=user_id');
+            $table->foreign('employee_id')->references('id')->on('users');
+            $table->date('date');
+            $table->string('attend_status');
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ class CreateJobTitlesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('job_titles');
+        Schema::dropIfExists('employee_attendances');
     }
 }
