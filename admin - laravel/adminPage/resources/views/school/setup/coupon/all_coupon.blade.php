@@ -1,6 +1,8 @@
 @extends('admin.admin_master')
 @section('admin')
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <div class="content-body" style="min-height: 884px;">
 			<div class="container-fluid">
 				<!-- Add Project -->
@@ -107,7 +109,7 @@
 
                                         <div class="form-group">
                                             <label class="info-title">Amount</label>
-                                            <input type="text" name="coupon_discount" class="input-group input-group-sm bg bg-secondary">
+                                            <input type="float" id="coupon_discount" name="coupon_discount" class="input-group input-group-sm bg bg-secondary">
                                             @error('coupon_discount')
                                             <span class="text-danger">{{$message}}</span>
                                             @enderror
@@ -148,7 +150,16 @@
         </div>
 
 
+        <script type="text/javascript">
+      $(document).ready(function() {
 
+        $('select[name="coupon_type"]').on('change', function(){
+
+            $('#coupon_discount').val('');
+    });
+})
+
+      </script>
 
 
 

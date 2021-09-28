@@ -12,6 +12,7 @@ use App\Models\Coupon;
 use DB;
 use PDF;
 use App\Exports\UsersExport;
+use App\Exports\TransactionExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
@@ -174,6 +175,21 @@ public function GetVoucher($voucher_id){
 }
 
 
+
+public function TransactionDelete($id){
+
+	$data = StudentReg::findOrFail($id);
+	$data->delete();
+
+	$notification = array(
+		'message' => 'Transaction has been deleted Successfully',
+		'alert-type' => 'info'
+	);
+
+	return redirect()->back()->with($notification);
+}
+
+
 public function AllRegStore(Request $request){
 
 
@@ -231,7 +247,6 @@ public function AllRegStore(Request $request){
 
 
 	$data['detail'] = StudentReg::where('id_no',$final_id_no)->first();
-
 	$pdf = PDF::loadView('school.student.student_reg.reg_confirm', $data);
 	$pdf->SetProtection(['copy', 'print'], '', 'pass');
 	return $pdf->stream('invoice.pdf');
@@ -263,5 +278,10 @@ return view('school.student.student_reg.view_student_class_list',$data);
     public function exportStudent() 
     {
         return Excel::download(new UsersExport, 'studentlist.xlsx');
+    }
+
+	public function exportTransaction() 
+    {
+        return Excel::download(new TransactionExport, 'transactionlist.xlsx');
     }
 }

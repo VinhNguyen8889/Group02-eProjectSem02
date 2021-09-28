@@ -17,7 +17,7 @@ class CouponController extends Controller
     public function StoreCoupon(Request $request){
 
     	$request->validate([
-    		'coupon_name' => 'required',
+    		'coupon_name' => 'required|unique:coupons,coupon_name',
             'coupon_type' => 'required',
     		'coupon_discount' => 'required',
     		'valid_from' => 'required',
@@ -26,8 +26,10 @@ class CouponController extends Controller
     	]);
 
         if($request->coupon_type=="value"){
+            $request->validate(['coupon_discount' => 'min:0' ]);
             $discount = $request->coupon_discount;}
          else{
+            $request->validate(['coupon_discount' => 'min:0|max:100' ]);
             $discount = $request->coupon_discount/100;
          };
 
@@ -81,7 +83,7 @@ class CouponController extends Controller
         public function UpdateCoupon(Request $request, $id){
 
             $request->validate([
-                'coupon_name' => 'required',
+                'coupon_name' => 'required|unique:coupons,coupon_name',
                 'coupon_type' => 'required',
                 'coupon_discount' => 'required',
                 'valid_from' => 'required',

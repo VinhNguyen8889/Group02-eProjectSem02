@@ -34,13 +34,14 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="role">Role</label>
+                                            <label for="role">User Type</label>
                                             <select name="usertype" class="form-control form-control-lg bg-secondary" id="">
-                                                <option value="Admin">Admin</option>
-                                                <option value="Marketing">Marketing</option>
-                                                <option value="Teacher">Teacher</option>
-                                                <option value="OfficeAdmin">Office Admin</option>
-                                            </select>                                        </div>
+                                                <option value="Admin" {{$data->usertype=="Admin"?'selected':''}}>Admin</option>
+                                                <option value="Marketing" {{$data->usertype=="Marketing"?'selected':''}}>Marketing</option>
+                                                <option value="Teacher" {{$data->usertype=="Teacher"?'selected':''}}>Teacher</option>
+                                                <option value="OfficeAdmin" {{$data->usertype=="OfficeAdmin"?'selected':''}}>Office Admin</option>
+                                            </select>                                      
+                                          </div>
                                         </div>
                                         <div class="col-md-6">
                                         </div>

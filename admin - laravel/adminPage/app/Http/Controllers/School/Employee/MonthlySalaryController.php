@@ -28,20 +28,34 @@ class MonthlySalaryController extends Controller
             return view('school.employee.employee_monthly_salary.get_monthly_salary');
         }else{
 
-
         $totalattend = EmployeeAttendance::where($where)->where('employee_id',$user->id)->get();    
         $absentCount = count($totalattend->where('attend_status','Absent'));
-        $salary_log = EmployeeSalaryLog::where('employee_id',$user->id)->orderBy('id','desc')->first();
         $teacher_class = StudentClass::where('teacher_id',$user->id)->where('planned_start_date','like',$month.'%')->get();
         $classCount = count($teacher_class);
+        $checkValue = EmployeeSalaryLog::where('employee_id',$user->id)->where('effected_salary','like',$month.'%')->get();
+        if($checkValue == '[]'){
+            //Case: Level Salary has been updated in this month
+            $employee_salary_log = EmployeeSalaryLog::where('employee_id',$user->id)->orderBy('id','desc')->first();
+            $level_salary = $employee_salary_log -> increment_salary;
+        }else{
+            $employee_salary_log_1 = EmployeeSalaryLog::where('employee_id',$user->id)->orderBy('id','desc')->first();
+            $employee_salary_log_2 = EmployeeSalaryLog::where('employee_id',$user->id)->orderBy('id','desc')->skip(1)->first();
+            $effected_date = new Carbon($employee_salary_log_1 -> effected_salary);
+            $level_salary_1_perday = ($employee_salary_log_1 -> increment_salary)/$countDaysInMonth;
+            $level_salary_2_perday = ($employee_salary_log_2 -> increment_salary)/$countDaysInMonth;
+            $countDays1 = $countDaysInMonth - (integer)($effected_date->day) + 1;
+            $countDays2 = (integer)($effected_date->day) - 1;
+            $level_salary =(integer)(($level_salary_1_perday * $countDays1) + ($level_salary_2_perday * $countDays2));
+        }
+
         $allowance_salary = (integer)$classCount * 500;
         $absent_salary = $absentCount * (($user->salary)/(integer)$countDaysInMonth);
-        $total_salary = $salary_log->present_salary + $allowance_salary - $absent_salary;
+        $total_salary = $user->salary + $level_salary + $allowance_salary - (integer)$absent_salary;
         return view('school.employee.employee_monthly_salary.details_monthly_salary',['user'=>$user,
                                                                                         'absentCount'=>$absentCount,
                                                                                         'month'=>$month,
                                                                                         'total_salary'=>$total_salary,
-                                                                                        'salary_log'=>$salary_log,
+                                                                                        'level_salary'=>$level_salary,
                                                                                         'allowance_salary'=>$allowance_salary,
                                                                                         ]);
         }

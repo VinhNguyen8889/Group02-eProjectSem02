@@ -16,7 +16,7 @@
                             <div class="card-header">
                                 <h4 class="card-title">Transaction List</h4>
                                 <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-                            <a href="{{route('add.student_reg')}}"><button type="button" class="btn btn-primary">Export</button></a>
+                            <a href="{{route('export.transaction')}}"><button type="button" class="btn btn-primary">Export</button></a>
                     </div>
                             </div>
 
@@ -33,8 +33,9 @@
 <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Class</th>
 <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Voucher Name</th>
 <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Paid</th>
+@if(Auth::user()->usertype =="Admin")
 <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Action</th>
-
+@endif
 </thead>
 <tbody>
                          
@@ -47,13 +48,14 @@
 <td>{{$reg->voucher_name}}</td>
 <td>{{$reg->paid}}</td>
 
+@if(Auth::user()->usertype =="Admin")
 <td>
 <div class="d-flex">
-<a href="{{route('edit.student_reg',$reg->id)}}" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-<a href="{{route('delete.student_reg',$reg->id)}}" class="btn btn-danger shadow btn-xs sharp mr-1" id="delete"><i class="fa fa-trash"></i></a>
+<a href="{{route('delete.transaction',$reg->id)}}" class="btn btn-danger shadow btn-xs sharp mr-1" id="delete"><i class="fa fa-trash"></i></a>
 
 </div>												
-</td>												
+</td>	
+@endif											
 </tr>
 @endforeach
 

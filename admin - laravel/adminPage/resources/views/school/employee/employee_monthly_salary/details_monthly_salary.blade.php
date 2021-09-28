@@ -44,7 +44,7 @@
   <tr>
     <td>3</td>
     <td><b>Level Salary</b></td>
-    <td>{{ $salary_log -> increment_salary }}</td>
+    <td>{{ $level_salary }}</td>
   </tr>
 
   <tr>

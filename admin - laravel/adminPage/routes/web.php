@@ -278,7 +278,8 @@ Route::prefix('students')->group(function(){
     Route::get('/reg/student/class/{student_id}', [StudentRegController::class, 'ViewStudentClassList'])->name('view.student_class_list');
     Route::get('/reg/invoice/{reg_id}', [StudentRegController::class, 'InvoiceReg'])->name('invoice.student_reg');
     Route::get('/reg/all/student/export', [StudentRegController::class, 'exportStudent'])->name('export.student_reg');
-
+    Route::get('/reg/transaction/delete/{id}', [StudentRegController::class, 'TransactionDelete'])->name('delete.transaction');
+    Route::get('/reg/all/transaction/export', [StudentRegController::class, 'exportTransaction'])->name('export.transaction');
 });
 
 
