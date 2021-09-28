@@ -40,7 +40,7 @@
 <td class="sorting_1"><img class="rounded-circle" width="35" src="images/profile/small/pic1.jpg" alt="">{{ $key+1 }}</td>
 <td>{{ $user->name }}</td>
 <td>{{ $user->email }}</td>
-<td>{{ $user->role }}</td>
+<td>{{ $user->usertype }}</td>
 <td>{{ $user->code }}</td>
 <td>
 <div class="d-flex">

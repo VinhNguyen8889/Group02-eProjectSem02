@@ -34,8 +34,13 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="role">Role</label>
-                                            <input type="text" name="role" class="form-control input-default">
+                                            <label for="role">User Type</label>
+                                            <select name="usertype" class="form-control form-control-lg bg-secondary" id="">
+                                                <option value="Admin">Admin</option>
+                                                <option value="Marketing">Marketing</option>
+                                                <option value="Teacher">Teacher</option>
+                                                <option value="OfficeAdmin">Office Admin</option>
+                                            </select>
                                         </div>
                                         </div>
                                         <div class="col-md-6">

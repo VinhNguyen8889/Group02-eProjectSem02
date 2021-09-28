@@ -276,6 +276,9 @@ Route::prefix('students')->group(function(){
     Route::post('/reg/all/store}', [StudentRegController::class, 'AllRegStore'])->name('store.all.reg');
     Route::get('/reg/all/student/view', [StudentRegController::class, 'AllRegView'])->name('view.student_reg');
     Route::get('/reg/student/class/{student_id}', [StudentRegController::class, 'ViewStudentClassList'])->name('view.student_class_list');
+    Route::get('/reg/invoice/{reg_id}', [StudentRegController::class, 'InvoiceReg'])->name('invoice.student_reg');
+    Route::get('/reg/all/student/export', [StudentRegController::class, 'exportStudent'])->name('export.student_reg');
+
 });
 
 
@@ -287,6 +290,8 @@ Route::prefix('students/management')->group(function(){
     Route::get('/studentlist/mark/add/{class_id}', [StudentManagementController::class, 'AddMark'])->name('add.mark');
     Route::post('/studentlist/mark/store/{class_id}', [StudentManagementController::class, 'StoreMark'])->name('store.mark');
     Route::get('/student/class', [StudentManagementController::class, 'StudentClastList'])->name('student.class_list');
+    Route::get('/reg/class/student/export/{class_id}', [StudentManagementController::class, 'exportClassStudent'])->name('export.class_student');
+    Route::get('/reg/class/all/export/', [StudentManagementController::class, 'ClassExport'])->name('export.all_class');
 
 });
 

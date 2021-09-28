@@ -12,15 +12,6 @@
                 </div>
                 <div id="header-bg_collapseOne" class="accordion__body collapse" data-parent="#accordion-seven" style="">
 
-                <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                <i class="flaticon-144-layout"></i>
-                <span class="nav-text">Dashboard</span>
-                </a>
-                <ul aria-expanded="false">
-                <li><a href="index.html">Dashboard</a></li>
-                </ul>
-                </li>
-
 
                 <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                 <i class="flaticon-028-user-1"></i>
@@ -32,7 +23,7 @@
                 </ul>
                 </li>
 
-                @if(Auth::user()->role == 'Admin')
+                @if(Auth::user()->usertype == 'Admin')
                 <li><a class="has-arrow ai-icon" href="{{route('all.user')}}" aria-expanded="false">
                 <i class="flaticon-028-user-1"></i>
                 <span class="nav-text">Manage Users</span>
@@ -43,7 +34,7 @@
                 </div>
                 </div>
 
-
+                @if(Auth::user()->usertype == 'Admin' || Auth::user()->usertype == 'Marketing')
                 <div class="accordion__item">
                 <div class="accordion__header collapsed accordion__header--info" data-toggle="collapse" data-target="#header-bg_collapseTwo">
                 <span class="accordion__header--icon"></span>
@@ -101,8 +92,10 @@
                 </li>
                 </div>
                 </div>
+                @endif
 
 
+                @if(Auth::user()->usertype == 'Admin' || Auth::user()->usertype == 'OfficeAdmin')
                 <div class="accordion__item">
                 <div class="accordion__header collapsed accordion__header--success" data-toggle="collapse" data-target="#header-bg_collapseThree">
                 <span class="accordion__header--icon"></span>
@@ -157,13 +150,6 @@
                 </li>
 
 
-                <li><a href="{{route('all.exam_type')}}">
-                <i class="flaticon-004-bar-chart"></i>
-                <span class="nav-text">Exam Type</span>
-                </a>
-                </li>
-
-
                 <li><a href="{{route('all.job_title')}}">
                 <i class="flaticon-004-bar-chart"></i>
                 <span class="nav-text">Job Title</span>
@@ -179,7 +165,12 @@
 
         </div>
         </div>
+        @endif
 
+
+
+        
+        @if(Auth::user()->usertype == 'Admin' || Auth::user()->usertype == 'OfficeAdmin')
         <div class="accordion__item">
                 <div class="accordion__header collapsed accordion__header--success" data-toggle="collapse" data-target="#header-bg_collapseFour">
                 <span class="accordion__header--icon"></span>
@@ -204,7 +195,10 @@
 
                 </div>
         </div>
+        @endif
 
+
+        @if(Auth::user()->usertype !== 'Marketing')
         <div class="accordion__item">
                 <div class="accordion__header collapsed accordion__header--success" data-toggle="collapse" data-target="#header-bg_collapseFive">
                 <span class="accordion__header--icon"></span>
@@ -213,15 +207,15 @@
                 </div>
                 <div id="header-bg_collapseFive" class="collapse accordion__body" data-parent="#accordion-seven">
 
-                @if(Auth::user()->role !== 'Student')
+                @if(Auth::user()->usertype !== 'Student')
                 <li><a href="{{route('all.class_list')}}">
                 <i class="flaticon-004-bar-chart"></i>
-                <span class="nav-text">Student List</span>
+                <span class="nav-text">Class List</span>
                 </a>
                 </li>
                 @endif
                 
-                @if(Auth::user()->role == 'Student')
+                @if(Auth::user()->usertype == 'Student')
                 <li><a href="{{route('student.class_list')}}">
                 <i class="flaticon-004-bar-chart"></i>
                 <span class="nav-text">Student Study Record</span>
@@ -232,7 +226,9 @@
 
                 </div>
         </div>
+    @endif
 
+    @if(Auth::user()->usertype == 'OfficeAdmin' || Auth::user()->usertype == 'Admin' || Auth::user()->usertype == 'Teacher')
         <div class="accordion__item">
                 <div class="accordion__header collapsed accordion__header--success" data-toggle="collapse" data-target="#header-bg_collapseSix">
                 <span class="accordion__header--icon"></span>
@@ -266,7 +262,7 @@
                 </li>
                 </div>
         </div>
-        
+        @endif
         
         </div>
         </div>

@@ -10,6 +10,10 @@ use App\Models\StudentReg;
 use App\Models\StudentSubject;
 use App\Models\Coupon;
 use DB;
+use PDF;
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class StudentRegController extends Controller
 {
@@ -142,9 +146,6 @@ public function StudentRegUpdate(Request $request,$id){
 
 
 
-
-
-
 public function StudentClassRegAdd($id){
 
 	$data['student'] = User::findOrFail($id);
@@ -228,12 +229,26 @@ public function AllRegStore(Request $request){
 		'alert-type' => 'success'
 	);
 
-	return redirect()->route('all.student_reg')->with($notification);
+
+	$data['detail'] = StudentReg::where('id_no',$final_id_no)->first();
+
+	$pdf = PDF::loadView('school.student.student_reg.reg_confirm', $data);
+	$pdf->SetProtection(['copy', 'print'], '', 'pass');
+	return $pdf->stream('invoice.pdf');
+}
+
+public function InvoiceReg($reg_id){
+	$data['detail'] = StudentReg::where('id_no',$reg_id)->first();
+
+	$pdf = PDF::loadView('school.student.student_reg.reg_confirm', $data);
+	$pdf->SetProtection(['copy', 'print'], '', 'pass');
+	return $pdf->stream('invoice.pdf');
 }
 
 
+
 public function AllRegView(){
-	$data['regs']= StudentReg::all();
+	$data['regs']= StudentReg::latest()->get();
 
 	return view('school.student.student_reg.view_all_reg',$data);
 }
@@ -244,4 +259,9 @@ public function ViewStudentClassList($student_id){
 
 return view('school.student.student_reg.view_student_class_list',$data);
 }
+
+    public function exportStudent() 
+    {
+        return Excel::download(new UsersExport, 'studentlist.xlsx');
+    }
 }

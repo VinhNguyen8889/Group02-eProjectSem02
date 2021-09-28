@@ -16,6 +16,7 @@
                             <div class="card-header">
                                 <h4 class="card-title">Student List</h4>
                                 <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                                <a href="{{route('export.student_reg')}}"><button type="button" class="btn btn-primary mr-2">Export</button></a> 
                             <a href="{{route('add.student_reg')}}"><button type="button" class="btn btn-secondary">New Student</button></a>
                     </div>
                             </div>

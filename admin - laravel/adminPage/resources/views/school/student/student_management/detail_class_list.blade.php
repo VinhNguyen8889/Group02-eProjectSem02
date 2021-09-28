@@ -18,6 +18,7 @@
                                 <h5 class="card-title"><strong>Teacher:</strong> <span class="text-info">{{$class['class_teacher']['name']}}</span></h5>
 
                                 <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                                <a href="{{route('export.class_student',$class->id)}}" ><button type="button" class="btn btn-primary mr-3">Export</button></a> 
                                 <a href="{{route('add.mark',$class->id)}}" ><button type="button" class="btn btn-primary mr-3">Update Mark</button></a>
                             <a href="{{route('all.class_list')}}"><button type="button" class="btn btn-secondary">Back</button></a>
                     </div>

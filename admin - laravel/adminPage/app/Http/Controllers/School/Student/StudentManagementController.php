@@ -10,6 +10,12 @@ use App\Models\StudentReg;
 use App\Models\StudentSubject;
 use App\Models\Coupon;
 use Auth;
+use App\Exports\ClassExport;
+use App\Exports\ClassStudentExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\FromView;
 
 class StudentManagementController extends Controller
 {
@@ -66,6 +72,17 @@ public function StudentClastList(){
         $data['regs'] = StudentReg::where('student_id',$student_id)->get();
 
     return view('school.student.student_management.student_class_list',$data);
+}
+
+
+public function exportClassStudent($class_id) 
+{
+    return Excel::download(new ClassStudentExport($class_id), 'users.xlsx');
+}
+
+public function ClassExport() 
+{
+    return Excel::download(new ClassExport, 'allclasslist.xlsx');
 }
 
 }

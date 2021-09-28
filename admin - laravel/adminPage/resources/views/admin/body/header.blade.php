@@ -33,7 +33,7 @@ Nav header end
 
 <li class="nav-item dropdown header-profile">
 <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-<img src="{{(!empty($result->profile_photo_path))?url('upload/user_images/'.$result->profile_photo_path):url('upload/no_image.jpg')}}" class="img-fluid rounded-circle" alt="" width="20" alt=""/>
+<img src="{{(!empty(Auth::user()->profile_photo_path))?url('upload/user_images/'.Auth::user()->profile_photo_path):url('upload/no_image.jpg')}}" class="img-fluid rounded-circle" alt="" width="20" alt=""/>
 <div class="header-info">
 <span>{{Auth::user()->name}}</span>
 <small>{{Auth::user()->usertype}}</small>

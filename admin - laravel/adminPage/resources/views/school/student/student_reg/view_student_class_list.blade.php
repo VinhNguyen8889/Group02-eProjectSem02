@@ -32,6 +32,7 @@
 <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Planned Start Day</th>
 <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Teacher</th>
 <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Mark</th>
+<th class="sorting" tabindex="0" aria-controls="example3" rowspan="1" colspan="1" aria-label="Gender: activate to sort column ascending" >Invoice</th>
 </thead>
 <tbody>
 
@@ -44,7 +45,9 @@
 <td>{{$reg['class']['class_shift']['name']}}</td>
 <td>{{$reg['class']['planned_start_date']}}</td>
 <td>{{$reg['class']['class_teacher']['name']}}</td>
-<td>{{$reg['mark']}}</td>											
+<td>{{$reg['mark']}}</td>		
+<td><a href="{{route('invoice.student_reg',$reg->id_no)}}" class="btn btn-info shadow btn-xs sharp mr-1" target="_blank"><i class="fa fa-eye"></i></a>
+</td>										
 </tr>
 @endforeach
 

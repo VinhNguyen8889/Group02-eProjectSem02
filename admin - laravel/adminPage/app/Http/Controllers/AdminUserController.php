@@ -91,7 +91,7 @@ class AdminUserController extends Controller
         // Manage USERs
 
     public function AllUser(){
-    	$data['allData'] = User::where('usertype','Admin')->get();
+    	$data['allData'] = User::where('usertype','!=','Student')->get();
     	return view('backend/user/all_user',$data);
     }
 
@@ -104,13 +104,12 @@ class AdminUserController extends Controller
     	$validatedData = $request->validate([
     		'email' => 'required|unique:users',
     		'name' => 'required',
-            'role' => 'required',
+            'usertype' => 'required',
     	]);
 
     	$data = new User();
         $code = rand(0000,9999);
-    	$data->usertype = 'Admin';
-        $data->role = $request->role;
+        $data->usertype = $request->usertype;
     	$data->name = $request->name;
     	$data->email = $request->email;
     	$data->password = bcrypt($code);
