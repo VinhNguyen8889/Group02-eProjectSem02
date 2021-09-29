@@ -86,7 +86,7 @@
                                     <form method="post" action="{{route('update.coupon',$editCoupon->id)}}" enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-group">
-                                            <label class="info-title">Coupon Name</label>
+                                            <label class="info-title">Coupon Name <span class="text-danger">*</span></label>
                                             <input type="text" name="coupon_name" class="input-group input-group-sm bg bg bg-secondary" value="{{$editCoupon->coupon_name}}">
                                             @error('coupon_name')
                                             <span class="text-danger">{{$message}}</span>
@@ -94,7 +94,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="info-title">Coupon Type</label>
+                                            <label class="info-title">Coupon Type <span class="text-danger">*</span></label>
                                             <select class="input-group input-group-sm bg-secondary" name="coupon_type">
                                             <option value="" selected="" disabled="">Please Select</option>
                                             <option value="value" {{$editCoupon->coupon_type=='value'?"selected":""}}>Value</option>
@@ -106,7 +106,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="info-title">Amount</label>
+                                            <label class="info-title">Amount <span class="text-danger">*</span></label>
                                             @if($editCoupon->coupon_type=="value")
                                             <input type="text" name="coupon_discount" class="input-group input-group-sm bg bg-secondary" value="{{$editCoupon->coupon_discount}}">
                                             @else
@@ -119,7 +119,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="info-title">Valid From</label>
+                                            <label class="info-title">Valid From <span class="text-danger">*</span></label>
                                             <input type="date" name="valid_from" class="input-group input-group-sm bg bg-secondary" value="{{$editCoupon->valid_from}}">
                                             @error('valid_from')
                                             <span class="text-danger">{{$message}}</span>
@@ -127,7 +127,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="info-title">Valid To</label>
+                                            <label class="info-title">Valid To <span class="text-danger">*</span></label>
                                             <input type="date" name="valid_to" class="input-group input-group-sm bg bg-secondary" value="{{$editCoupon->valid_to}}">
                                             @error('valid_to')
                                             <span class="text-danger">{{$message}}</span>
@@ -135,7 +135,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="info-title">Status</label>
+                                            <label class="info-title">Status <span class="text-danger">*</span></label>
                                             <select class="input-group input-group-sm bg-secondary" name="status">
                                             <option value="" selected="" disabled="">Please Select</option>
                                             <option value="1" {{$editCoupon->status==1?"selected":""}}>Active</option>

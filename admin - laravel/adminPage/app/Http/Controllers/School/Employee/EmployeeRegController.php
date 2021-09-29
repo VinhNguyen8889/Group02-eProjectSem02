@@ -13,7 +13,7 @@ class EmployeeRegController extends Controller
 {
     public function EmployeeRegAll(){
 
-    	$data['allData'] = User::where('usertype','Employee')->get();
+    	$data['allData'] = User::where('usertype','Teacher')->get();
     	return view('school.employee.employee_registration.all_employee_reg',$data);
     }
 
@@ -53,7 +53,7 @@ class EmployeeRegController extends Controller
 		]);
     	$checkYear = date('Ym',strtotime($request->join_date));
     	//dd($checkYear);
-    	$employee = User::where('usertype','Employee')->orderBy('id','DESC')->first();
+    	$employee = User::where('usertype','Teacher')->orderBy('id','DESC')->first();
 
     	if ($employee == null) {
     		$firstReg = 0;
@@ -66,7 +66,7 @@ class EmployeeRegController extends Controller
     			$id_no = '0'.$employeeId;
     		}
     	}else{
-     	$employee = User::where('usertype','employee')->orderBy('id','DESC')->first()->id;
+     	$employee = User::where('usertype','Teacher')->orderBy('id','DESC')->first()->id;
      	$employeeId = $employee+1;
      	if ($employeeId < 10) {
     			$id_no = '000'.$employeeId;
@@ -84,7 +84,7 @@ class EmployeeRegController extends Controller
     	$code = rand(0000,9999);
     	$user->id_no = $final_id_no;
     	$user->password = bcrypt($code);
-    	$user->usertype = 'Employee';
+    	$user->usertype = 'Teacher';
     	$user->code = $code;
     	$user->name = trim($request->name);
     	$user->fname = trim($request->fname);
@@ -111,8 +111,8 @@ class EmployeeRegController extends Controller
           $employee_salary = new EmployeeSalaryLog();
           $employee_salary->employee_id = $user->id;
           $employee_salary->effected_salary = date('Y-m-d',strtotime($request->join_date));
-          $employee_salary->previous_salary = $request->salary;
-		  $employee_salary->present_salary = $request->salary;
+          $employee_salary->previous_salary = $designation->basic_salary;
+		  $employee_salary->present_salary = $designation->basic_salary;
           $employee_salary->increment_salary = '0';
           $employee_salary->save();
 

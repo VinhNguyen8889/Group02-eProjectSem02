@@ -27,15 +27,21 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="name">User Name</label>
+                                            <label for="name">User Name <span class="text-danger">*</span></label>
                                             <input type="text" name="name" class="form-control input-default " value="{{$result->name}}">
                                         </div>
+                                        @error('name')
+                                                <span class="text-danger">{{$message}}</span>
+                                                @enderror
                                         </div>
                                         <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="name">Email</label>
+                                            <label for="name">Email <span class="text-danger">*</span></label>
                                             <input type="email" name="email" class="form-control input-default " value="{{$result->email}}">
                                         </div>
+                                        @error('email')
+                                                <span class="text-danger">{{$message}}</span>
+                                                @enderror
                                         </div>
                                         </div>
 
@@ -45,21 +51,32 @@
                                             <label for="mobile">User Mobile</label>
                                             <input type="text" name="mobile" class="form-control input-default " value="{{$result->mobile}}">
                                         </div>
+                                        @error('mobile')
+                                                <span class="text-danger">{{$message}}</span>
+                                                @enderror
                                         </div>
                                         <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="address">User Address</label>
                                             <input type="text" name="address" class="form-control input-default " value="{{$result->address}}">
                                         </div>
+                                        @error('address')
+                                                <span class="text-danger">{{$message}}</span>
+                                                @enderror
                                         </div>
                                         </div>
 
                                         <div class="row">
                                             <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="gender">Gender</label>
-                                            <input type="text" name="gender" class="form-control input-default " value="{{$result->gender}}">
-                                        </div>
+                                            <label for="gender">Gender <span class="text-danger">*</span></label>
+                                            <select name="gender" class="form-control form-control-lg bg-secondary" id="">
+                                                <option value="Male" {{$result->gender=="Male"?'selected':''}}>Male</option>
+                                                <option value="Female" {{$result->gender=="Female"?'selected':''}}>Female</option>
+                                   </select>                                             </div>
+                                        @error('gender')
+                                                <span class="text-danger">{{$message}}</span>
+                                                @enderror
                                         </div>
 
                                         <div class="col-md-6">
@@ -76,6 +93,9 @@
                                                 <label class="custom-file-label">Choose file</label>
                                             </div>
                                         </div>
+                                        @error('profile_photo_path')
+                                                <span class="text-danger">{{$message}}</span>
+                                                @enderror
                                         </div>
 
                                         <div class="form-group">

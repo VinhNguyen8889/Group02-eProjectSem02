@@ -131,7 +131,7 @@ class StudentClassController extends Controller
 		$data->day_id = $request->gen_day_id;
 		$data->subject_id = $request->gen_subject_id;
 		$data->shift_id = $request->gen_shift_id;
-		$data->planned_start_date = $request->gen_planned_start_date;
+		$data->planned_start_date = date('Y-m-d',strtotime($request->gen_planned_start_date));
 		$data->applied_fee = $request->gen_applied_fee;
 		$data->teacher_id = $request->gen_teacher_id;
 		$data->name = $request->gen_class;
@@ -149,45 +149,164 @@ class StudentClassController extends Controller
 
 
 
-    // public function EditStudentClass($id){
-    // 	$data = StudentClass::find($id);
-    // 	return view('school.setup.student_class.edit_class',compact('data'));
+    public function EditStudentClass($id){
+    	$editClass = StudentClass::find($id);
+		$data['years'] = StudentYear::all();
+    	$data['days'] = StudentDay::all();
+    	$data['groups'] = StudentGroup::all();
+    	$data['shifts'] = StudentShift::all();
+		$data['subjects'] = StudentSubject::all();
+		$data['teachers'] = User::all()->where('role','Teacher');
 
-    // }
+
+		$data['class_name'] = $editClass->name;
+		$data['gen_teacher'] = $editClass->class_teacher->name;
+		$data['gen_fee'] = $editClass->class_subject->fee_detail->fee_amount;
+
+		$data['year_id'] = $editClass->year_id;
+		$data['day_id'] = $editClass->day_id;
+		$data['group_id'] = $editClass->group_id;
+		$data['shift_id'] = $editClass->shift_id;
+		$data['subject_id'] = $editClass->subject_id;
+		$data['planned_start_date'] = $editClass->planned_start_date;
+		$data['teacher_id'] = $editClass->teacher_id;
+		$data['disabled'] = "disabled";
+		$data['button'] = "btn btn-dark";
+		$data['class_id'] = $editClass->id;
+
+    	return view('school.setup.student_class.edit_class',$data);
+    }
 
 
-    // public function UpdateStudentClass(Request $request,$id){
+    public function UpdateStudentClass(Request $request,$id){
 
-	// 	$data = StudentClass::find($id);
+		$data = StudentClass::find($id);
      
-    //  $validatedData = $request->validate([
-    // 		'name' => 'required|unique:student_classes,name,'.$data->id
+     $validatedData = $request->validate([
+    		'gen_class' => 'required|unique:student_classes,name,'.$data->id,
     		
-    // 	]);
+    	]);
 
-    	
-    // 	$data->name = $request->name;
-    // 	$data->save();
+    	$data->year_id = $request->gen_year_id;
+		$data->group_id = $request->gen_group_id;
+		$data->day_id = $request->gen_day_id;
+		$data->subject_id = $request->gen_subject_id;
+		$data->shift_id = $request->gen_shift_id;
+		$data->planned_start_date = date('Y-m-d',strtotime($request->gen_planned_start_date));
+		$data->applied_fee = $request->gen_applied_fee;
+		$data->teacher_id = $request->gen_teacher_id;
+		$data->name = $request->gen_class;
 
-    // 	$notification = array(
-    // 		'message' => 'Student Class Updated Successfully',
-    // 		'alert-type' => 'success'
-    // 	);
-
-    // 	return redirect()->route('all.class')->with($notification);
-    // }
-
-
-    public function DeleteStudentClass($id){
-    	$data = StudentClass::find($id);
-    	$data->delete();
+    	$data->save();
 
     	$notification = array(
-    		'message' => 'Class Deleted Successfully',
-    		'alert-type' => 'info'
+    		'message' => 'Student Class Updated Successfully',
+    		'alert-type' => 'success'
     	);
 
     	return redirect()->route('all.class')->with($notification);
+
+    }
+
+
+    public function DeleteStudentClass($id){
+
+		try {
+			$data = StudentClass::find($id);
+			$data->delete();
+	
+			$notification = array(
+				'message' => 'Class Deleted Successfully',
+				'alert-type' => 'info'
+			);
+	
+			return redirect()->route('all.class')->with($notification);
+	
+		} catch (\Illuminate\Database\QueryException $e) {
+			//   var_dump($e->errorInfo);
+			$notification = array(
+				'message' => 'Cannot delete the data with associated records.',
+				'alert-type' => 'error'
+			);
+	
+			return redirect()->back()->with($notification);
+	
+		  }
+
+    }
+
+	public function ClassRegeneration(Request $request, $id){
+
+		$editClass = StudentClass::find($id);
+		$data['class_id'] = $editClass->id;
+
+
+		$data['years'] = StudentYear::all();
+    	$data['days'] = StudentDay::all();
+    	$data['groups'] = StudentGroup::all();
+    	$data['shifts'] = StudentShift::all();
+		$data['subjects'] = StudentSubject::all();
+		$data['teachers'] = User::all()->where('role','Teacher');
+
+		$validatedData = $request->validate([
+    		'year_id' => 'required',
+			'day_id' => 'required',
+			'group_id' => 'required',
+			'shift_id' => 'required',
+			'subject_id' => 'required',
+			// 'teacher_id' => 'required',
+			'effective_date' => 'required|after:today',
+    	]);
+		
+
+		
+			$check_effective_date = date('Y-m-d',strtotime($request->effective_date));
+			$min_date = SubjectFeeLog::where('subject_id',$request->subject_id)->orderBy('effective_date','ASC')->firstOrFail()->effective_date;
+
+			if($min_date>=$check_effective_date){
+				$notification = array(
+					'message' => 'There is no Fee record associated with the date you choose!',
+					'alert-type' => 'error'
+				);
+				return redirect()->back()->with($notification);
+			} else{
+
+			$data['gen_fee']= SubjectFeeLog::where('subject_id',$request->subject_id)->where('effective_date','<=',$check_effective_date)->orderBy('effective_date','DESC')->firstOrFail()->fee_amount;
+	
+
+		$gen_year=StudentYear::where('id',$request->year_id)->first()->name;
+    	$gen_day = StudentDay::where('id',$request->day_id)->first()->short_code;
+    	$gen_group = StudentGroup::where('id',$request->group_id)->first()->short_code;
+    	$gen_shift= StudentShift::where('id',$request->shift_id)->first()->short_code;
+		$gen_subject = StudentSubject::where('id',$request->subject_id)->first()->short_code;
+		
+		$gen_effective_date = date('my',strtotime($request->effective_date));
+		$data['class_name'] = $gen_group."_".$gen_subject."_".$gen_shift.$gen_day."_".$gen_effective_date;
+		$checkname = $gen_group."_".$gen_subject."_".$gen_shift.$gen_day."_".$gen_effective_date;
+		
+
+
+		if($request->teacher_id==0){
+			$data['gen_teacher'] = "Undefined";
+			$data['teacher_id'] = NULL;
+		} else {
+			$data['gen_teacher'] = User::all()->where('id',$request->teacher_id)->first()->name;
+			$data['teacher_id'] = $request->teacher_id;
+		}
+
+		$data['year_id'] = $request->year_id;
+		$data['day_id'] = $request->day_id;
+		$data['group_id'] = $request->group_id;
+		$data['shift_id'] = $request->shift_id;
+		$data['subject_id'] = $request->subject_id;
+		$data['planned_start_date'] = $check_effective_date;
+
+		$data['disabled'] = "";
+		$data['button'] = "btn btn-success";
+
+    	return view('school.setup.student_class.edit_class',$data);
+	
+	}
 
     }
 }

@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class EmployeeSalaryController extends Controller
 {
     public function EmployeeSalaryAll(){
-    	$data['allData'] = User::where('usertype','Employee')->get();
+    	$data['allData'] = User::where('usertype','Teacher')->get();
     	return view('school.employee.employee_salary.all_employee_salary',$data);
     }
 

@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class StudentClass extends Model
 {
+
+    protected $guarded =[];
+    
     public function class_year(){
         return $this->belongsTo(StudentYear::class,'year_id','id');
     }

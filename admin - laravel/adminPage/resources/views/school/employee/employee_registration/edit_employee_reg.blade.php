@@ -20,7 +20,7 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="name">Name</label>
+                                            <label for="name">Name <span class="text-danger">*</span></label>
                                             <input type="text" name="name" class="form-control input-default" maxlength="32" value="{{ $editData->name }}">
                                             @error('name')
                                                 <span class="text-danger">{{$message}}</span>
@@ -50,7 +50,7 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="gender">Gender</label>
+                                            <label for="gender">Gender <span class="text-danger">*</span></label>
                                             <select class="form-control form-control-lg bg-secondary" name="gender">
                                             <option value="" selected="" disabled="">Select Gender</option>
                                             <option value="Male" {{ ($editData->gender == 'Male')? 'selected':'' }}>Male</option>
@@ -64,7 +64,7 @@
                                         </div>
                                         <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="dob">DOB</label>
+                                            <label for="dob">DOB <span class="text-danger">*</span></label>
                                             <input type="date" name="dob" class="form-control bg-secondary input-default" value="{{ $editData->dob }}" min="1950-01-01">
                                             @error('dob')
                                                 <span class="text-danger">{{$message}}</span>
@@ -73,7 +73,7 @@
                                         </div>
                                         <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="designation_id">Designation</label>
+                                            <label for="designation_id">Designation <span class="text-danger">*</span></label>
                                             <select class="form-control form-control-lg bg-secondary" name="designation_id">
                                             <option value="" selected="" disabled="">Select Designation</option>
                                             @foreach($designation as $value)
@@ -90,7 +90,7 @@
                                         <div class="row">
                                         <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="mobile">Mobile</label>
+                                            <label for="mobile">Mobile <span class="text-danger">*</span></label>
                                             <input type="text" name="mobile" class="form-control input-default" maxlength="12" value="{{ $editData->mobile }}">
                                             @error('mobile')
                                                 <span class="text-danger">{{$message}}</span>
@@ -99,7 +99,7 @@
                                         </div>
                                         <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="email">Email</label>
+                                            <label for="email">Email <span class="text-danger">*</span></label>
                                             <input type="text" name="email" class="form-control input-default" value="{{ $editData->email }}">
                                             @error('email')
                                                 <span class="text-danger">{{$message}}</span>
@@ -108,7 +108,7 @@
                                         </div>
                                         <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="join_date">Joining Date</label>
+                                            <label for="join_date">Joining Date <span class="text-danger">*</span></label>
                                             <input type="date" name="join_date" class="form-control bg-secondary input-default" min="2011-01-01" value="{{ $editData->join_date}}">
                                             @error('join_date')
                                                 <span class="text-danger">{{$message}}</span>
@@ -120,8 +120,8 @@
                                         <div class="row">
                                         <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="address">Address</label>
-                                            <input type="text" name="address" class="form-control input-default" value="{{ $editData->Address }}">
+                                            <label for="address">Address <span class="text-danger">*</span></label>
+                                            <input type="text" name="address" class="form-control input-default" value="{{ $editData->address }}">
                                             @error('address')
                                                 <span class="text-danger">{{$message}}</span>
                                                 @enderror

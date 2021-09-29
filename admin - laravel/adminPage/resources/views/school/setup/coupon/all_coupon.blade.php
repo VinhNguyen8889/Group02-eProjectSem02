@@ -88,7 +88,7 @@
                                     <form method="post" action="{{route('store.coupon')}}" enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-group">
-                                            <label class="info-title">Coupon Name</label>
+                                            <label class="info-title">Coupon Name <span class="text-danger">*</span></label>
                                             <input type="text" name="coupon_name" class="input-group input-group-sm bg bg bg-secondary">
                                             @error('coupon_name')
                                             <span class="text-danger">{{$message}}</span>
@@ -96,7 +96,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="info-title">Coupon Type</label>
+                                            <label class="info-title">Coupon Type <span class="text-danger">*</span></label>
                                             <select class="input-group input-group-sm bg-secondary" name="coupon_type">
                                             <option value="" selected="" disabled="">Please Select</option>
                                             <option value="value">Value</option>
@@ -108,7 +108,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="info-title">Amount</label>
+                                            <label class="info-title">Amount <span class="text-danger">*</span></label>
                                             <input type="float" id="coupon_discount" name="coupon_discount" class="input-group input-group-sm bg bg-secondary">
                                             @error('coupon_discount')
                                             <span class="text-danger">{{$message}}</span>
@@ -116,7 +116,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="info-title">Valid From</label>
+                                            <label class="info-title">Valid From <span class="text-danger">*</span></label>
                                             <input type="date" name="valid_from" class="input-group input-group-sm bg bg-secondary">
                                             @error('valid_from')
                                             <span class="text-danger">{{$message}}</span>
@@ -124,7 +124,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="info-title">Valid To</label>
+                                            <label class="info-title">Valid To <span class="text-danger">*</span></label>
                                             <input type="date" name="valid_to" class="input-group input-group-sm bg bg-secondary">
                                             @error('valid_to')
                                             <span class="text-danger">{{$message}}</span>

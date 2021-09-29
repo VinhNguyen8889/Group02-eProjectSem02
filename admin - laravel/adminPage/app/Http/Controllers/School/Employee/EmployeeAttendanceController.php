@@ -19,9 +19,9 @@ class EmployeeAttendanceController extends Controller
 
     public function EmployeeAttendanceAdd(){
 		$today = Carbon::now()->toDateString();
-    	$employees = User::where('usertype','Employee')->get();
+    	$employees = User::where('usertype','Teacher')->get();
 		$data = EmployeeAttendance::select('date')->where('date',$today)->groupBy('date')->get();
-		if($data!='null'){
+		if($data!='[]'){
 			return redirect()->route('edit.employee_attendance',$today);
 			
 		}else{

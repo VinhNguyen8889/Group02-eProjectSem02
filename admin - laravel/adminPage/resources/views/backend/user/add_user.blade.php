@@ -19,28 +19,37 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="name">User Name</label>
+                                            <label for="name">User Name <span class="text-danger">*</span></label>
                                             <input type="text" name="name" class="form-control input-default">
                                         </div>
+                                        @error('name')
+                                                <span class="text-danger">{{$message}}</span>
+                                                @enderror
                                         </div>
                                         <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="email">Email</label>
+                                            <label for="email">Email <span class="text-danger">*</span></label>
                                             <input type="email" name="email" class="form-control input-default">
                                         </div>
+                                        @error('email')
+                                                <span class="text-danger">{{$message}}</span>
+                                                @enderror
                                         </div>
                                         </div>
 
                                         <div class="row">
                                             <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="role">User Type</label>
+                                            <label for="role">User Type <span class="text-danger">*</span></label>
                                             <select name="usertype" class="form-control form-control-lg bg-secondary" id="">
                                                 <option value="Admin">Admin</option>
                                                 <option value="Marketing">Marketing</option>
                                                 <option value="Teacher">Teacher</option>
                                                 <option value="OfficeAdmin">Office Admin</option>
                                             </select>
+                                            @error('usertype')
+                                                <span class="text-danger">{{$message}}</span>
+                                                @enderror
                                         </div>
                                         </div>
                                         <div class="col-md-6">

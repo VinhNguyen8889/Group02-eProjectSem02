@@ -14,7 +14,7 @@
             <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Class Day Datatable</h4>
+                                <h4 class="card-title">Day Combo Datatable</h4>
                                 <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                             <a href="{{route('add.day')}}"><button type="button" class="btn btn-secondary">Add Day Combo</button></a>
                     </div>

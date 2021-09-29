@@ -31,35 +31,44 @@
                                         <div class="row">
                                         <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="year">Year</label>
+                                            <label for="year">Year <span class="text-danger">*</span></label>
                                             <select class="form-control form-control-lg bg-secondary" name="year_id">
-                                            <option value="" selected="" disabled="">Please Select</option>
+                                            <option value="" selected="" disabled="">Please Select </option>
                                                 @foreach($years as $year)
-                                                     <option value="{{ $year->id }}">{{ $year->name }}</option>
+                                                     <option value="{{ $year->id }}" {{$year->id==$year_id?'selected':''}}>{{ $year->name }}</option>
                                                 @endforeach	 
                                                </select>
+                                               @error('year_id')
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
                                         </div>
                                         </div>
                                         <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="class">Day</label>
+                                            <label for="class">Day <span class="text-danger">*</span></label>
                                             <select class="form-control form-control-lg bg-secondary" name="day_id">
                                             <option value="" selected="" disabled="">Please Select</option>
                                                 @foreach($days as $day)
-                                                     <option value="{{ $day->id }}">{{ $day->name }}</option>
+                                                     <option value="{{ $day->id }}" {{$day->id==$day_id?'selected':''}}>{{ $day->name }}</option>
                                                 @endforeach	 
                                                </select>
+                                               @error('day_id')
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
                                         </div>
                                         </div>
                                         <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="class">Shift</label>
+                                            <label for="class">Shift <span class="text-danger">*</span></label>
                                             <select class="form-control form-control-lg bg-secondary" name="shift_id">
                                             <option value="" selected="" disabled="">Please Select</option>
                                                 @foreach($shifts as $shift)
-                                                     <option value="{{ $shift->id }}">{{ $shift->name }}</option>
+                                                     <option value="{{ $shift->id }}" {{$shift->id==$shift_id?'selected':''}}>{{ $shift->name }}</option>
                                                 @endforeach	 
                                                </select>
+                                               @error('shift_id')
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
                                         </div>
                                         </div>
                                         </div>
@@ -67,24 +76,30 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="group">Group</label>
+                                            <label for="group">Group <span class="text-danger">*</span></label>
                                             <select class="form-control form-control-lg bg-secondary" name="group_id">
                                             <option value="" selected="" disabled="">Please Select</option>
                                                 @foreach($groups as $group)
-                                                     <option value="{{ $group->id }}">{{ $group->name }}</option>
+                                                     <option value="{{ $group->id }}" {{$group->id==$group_id?'selected':''}}>{{ $group->name }}</option>
                                                 @endforeach	 
                                                </select>
+                                               @error('group_id')
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
                                         </div>
                                         </div>
                                         <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="shift">Subject</label>
+                                            <label for="shift">Subject <span class="text-danger">*</span></label>
                                             <select class="form-control form-control-lg bg-secondary" name="subject_id">
                                             <option value="" selected="" disabled="">Please Select</option>
                                                 @foreach($subjects as $subject)
-                                                     <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                                     <option value="{{ $subject->id }}" {{$subject->id==$subject_id?'selected':''}}>{{ $subject->name }}</option>
                                                 @endforeach	 
                                                </select>
+                                               @error('subject_id')
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
                                         </div>
                                         </div>
                                         <div class="col-md-4">
@@ -93,9 +108,12 @@
                                             <select class="form-control form-control-lg bg-secondary" name="teacher_id">
                                             <option value="0" selected="" disabled="">Please Select</option>
                                                 @foreach($teachers as $teacher)
-                                                     <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
+                                                     <option value="{{ $teacher->id }}" {{$teacher->id==$teacher_id?'selected':''}}>{{ $teacher->name }}</option>
                                                 @endforeach	 
                                                </select>
+                                               @error('teacher_id')
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
                                         </div>
                                         </div>
                                         </div>
@@ -104,8 +122,8 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                             <div class="form-group">
-                                            <label class="info-title">Effective Date</label>
-                                            <input type="date" name="effective_date" class="form-control bg-secondary input-default">
+                                            <label class="info-title">Effective Date <span class="text-danger">*</span></label>
+                                            <input type="date" name="effective_date" class="form-control bg-secondary input-default" value="{{$planned_start_date}}">
                                             @error('effective_date')
                                             <span class="text-danger">{{$message}}</span>
                                             @enderror

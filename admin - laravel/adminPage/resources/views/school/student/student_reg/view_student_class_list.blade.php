@@ -15,6 +15,9 @@
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">Class List</h4>
+                                <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                            <a href="{{route('all.student_reg')}}"><button type="button" class="btn btn-secondary">Back</button></a>
+                    </div> 
                             </div>
 
                             <div class="card-body">
@@ -47,6 +50,8 @@
 <td>{{$reg['class']['class_teacher']['name']}}</td>
 <td>{{$reg['mark']}}</td>		
 <td><a href="{{route('invoice.student_reg',$reg->id_no)}}" class="btn btn-info shadow btn-xs sharp mr-1" target="_blank"><i class="fa fa-eye"></i></a>
+<a href="{{route('edit.transaction',$reg->id)}}" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
+
 </td>										
 </tr>
 @endforeach

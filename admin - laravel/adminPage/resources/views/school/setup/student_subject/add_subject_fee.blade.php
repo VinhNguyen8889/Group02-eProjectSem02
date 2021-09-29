@@ -31,7 +31,7 @@
                                         <input type="hidden" name="subject_id" value="{{$subject->id}}">
 
                                         <div class="form-group">
-                                            <label class="info-title">Fee Amount</label>
+                                            <label class="info-title">Fee Amount <span class="text-danger">*</span></label>
                                             <input type="number" name="fee_amount" class="form-control input-default">
                                             @error('fee_amount')
                                             <span class="text-danger">{{$message}}</span>
@@ -39,7 +39,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="info-title">Effective Date</label>
+                                            <label class="info-title">Effective Date <span class="text-danger">*</span></label>
                                             <input type="date" name="effective_date" class="form-control input-default">
                                             @error('effective_date')
                                             <span class="text-danger">{{$message}}</span>

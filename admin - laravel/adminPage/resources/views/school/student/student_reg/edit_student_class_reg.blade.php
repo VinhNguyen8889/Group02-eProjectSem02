@@ -16,7 +16,8 @@
                                 <h4 class="card-title">Add New Registration</h4>
                                 <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                             <a href="{{route('all.student_reg')}}"><button type="button" class="btn btn-secondary">Back</button></a>
-                    </div>  </div>
+                    </div>  
+                </div>
 
                     <div class="card-header">   
                     <div class="table-responsive">
@@ -34,11 +35,11 @@
 <tbody>
                            
 <tr role="row">
-<td>{{$student->name}}</td>
-<td>{{$student->dob}}</td>
-<td>{{$student->gender}}</td>
-<td>{{$student->mobile}}</td>
-<td>{{$student->email}}</td>										
+<td>{{$transaction->student->name}}</td>
+<td>{{$transaction->student->dob}}</td>
+<td>{{$transaction->student->gender}}</td>
+<td>{{$transaction->student->mobile}}</td>
+<td>{{$transaction->student->email}}</td>										
 </tr>
 </tbody>
 </table>
@@ -57,7 +58,7 @@
 <select class="form-control bg-secondary" name="subject_id">
 <option value="" selected="" disabled="">Please Select <span class="text-danger">*</span></option>
 @foreach($subjects as $key=>$subject)
-<option value="{{$subject->id}}">{{$subject->name}}</option>
+<option value="{{$subject->id}}" {{$subject->id==$transaction->class->subject_id?'selected':''}}>{{$subject->name}}</option>
 @endforeach
 </select>
 
@@ -71,9 +72,12 @@
 <div class="form-group">
 <label for="class_id">Class <span class="text-danger">*</span></label>
 <select class="form-control bg-secondary" name="class_id">
-<!-- <option value="" selected="" >Please Select</option> -->
-
+<option value="" selected="" disabled="">Please Select <span class="text-danger">*</span></option>
+@foreach($selectedClasses as $key=>$class)
+<option value="{{$class->id}}" {{$class->id==$transaction->class_id?'selected':''}}>{{$class->name}}</option>
+@endforeach
 </select>
+
 
 @error('reg_class_id') 
 <span class="text-danger">{{ $message }}</span>
@@ -88,7 +92,7 @@
 <select class="form-control bg-secondary" name="" id="vouchername">
 <option value="0" selected>No Voucher</option>
 @foreach($vouchers as $key=>$voucher)
-<option value="{{$voucher->id}}">{{$voucher->coupon_name}}</option>
+<option value="{{$voucher->id}}" {{$voucher->coupon_name==$transaction->voucher_name?'selected':''}}>{{$voucher->coupon_name}}</option>
 @endforeach
 </select>
 </div>
@@ -114,39 +118,63 @@
 </tr>
 </thead>
 <tbody id="transactionDetail">
+<tr>
+<th>
+<div class="form-group mb-0">
+<input type="float" value="{{$transaction->class->applied_fee}}" id="fee_amount" name="fee_amount" disabled class="bg bg-primary text-white text-center" size="5">
+</div>
+</th>
+<th>
+<div class="form-group mb-0">
+<input type="float" value="{{$transaction->value}}" id="discount_value" name="discount_value" disabled class="bg bg-primary text-white text-center" size="5">
+</div>
+</th>
+<th>
+<div class="form-group mb-0">
+<input type="float" value="{{$transaction->discount_amount}}" id="discount_amount" name="discount_amount"  disabled class="bg bg-primary text-white text-center" size="5">
+</div>
+</th>
+<th>
+<div class="form-group mb-0">
+<input type="float" value="{{$transaction->paid}}"  name="subtotal" id="subtotal" disabled class="bg bg-primary text-white text-center" size="5">
+</div>
+</th>
+<th>
 
+</th>
+</tr>
 </tbody>
 </table>
 
-<form method="post" action="{{route('store.all.reg')}}" enctype="multipart/form-data">
+<form method="post" action="{{route('update.transaction',$transaction->id)}}" enctype="multipart/form-data">
 @csrf
-<input type="text" id="reg_student_id" name ="reg_student_id" value="{{$student->id}}" hidden>
+<input type="text" id="reg_student_id" name ="reg_student_id" value="{{$transaction->student->id}}" hidden >
 
-<input type="text" id="reg_class_id" name="reg_class_id" hidden>
+<input type="text" id="reg_class_id" name="reg_class_id" value="{{$transaction->class_id}}" hidden>
 
-<input type="text" id="reg_coupon_name" name="reg_coupon_name" hidden>
-<input type="float" id="reg_fee_amount" name="reg_fee_amount" hidden>
-<input type="float" id="reg_value" name="reg_value" hidden>
-<input type="float" id="reg_discount_amount" name="reg_discount_amount" hidden>
-<input type="float" id="reg_paid" name="reg_paid" hidden>
+<input type="text" id="reg_coupon_name" name="reg_coupon_name" value="{{$transaction->voucher_name}}" hidden >
+<input type="float" id="reg_fee_amount" name="reg_fee_amount" value="{{$transaction->class->applied_fee}}"  hidden>
+<input type="float" id="reg_value" name="reg_value" value="{{$transaction->value}}" hidden>
+<input type="float" id="reg_discount_amount" name="reg_discount_amount" value="{{$transaction->discount_amount}}" hidden>
+<input type="float" id="reg_paid" name="reg_paid" value="{{$transaction->paid}}" hidden>
   
 
 <div class="form-group mb-0" id="confirm_btn">
     <p class="text-info"> <strong>Payment Type <span class="text-danger">*</span></strong> </p>
 <div class="radio">
-<label><input type="radio" value="cash" name="payment"> Cash</label>
+<label><input type="radio" value="cash" name="payment" {{$transaction->payment=="cash"?'checked':''}}> Cash</label>
 </div>
 <div class="radio">
-<label><input type="radio" value="transfer" name="payment"> Bank Transfer</label>
+<label><input type="radio" value="transfer" name="payment" {{$transaction->payment=="transfer"?'checked':''}}> Bank Transfer</label>
 </div>
 <div class="radio disabled">
-<label><input type="radio" value="visamaster" name="payment"> Visa/Master </label>
+<label><input type="radio" value="visamaster" name="payment" {{$transaction->payment=="visamaster"?'checked':''}}> Visa/Master </label>
 </div>
 </div>
 @error('payment') 
 <span class="text-danger">{{ $message }}</span>
 @enderror 
-<input type="submit" class="btn btn-success" id="confirm_btn" value="Register">  
+<input type="submit" class="btn btn-success" id="confirm_btn" value="Update">  
 
 </form>
 
@@ -160,8 +188,8 @@
 
         <script type="text/javascript">
       $(document).ready(function() {
-        $('#vouchername').hide();
-        $('#confirm_btn').hide();
+        // $('#vouchername').hide();
+        // $('#confirm_btn').hide();
 
         $('select[name="subject_id"]').on('change', function(){
             var subject_id = $(this).val();

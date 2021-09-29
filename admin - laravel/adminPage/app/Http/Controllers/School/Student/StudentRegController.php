@@ -59,6 +59,17 @@ class StudentRegController extends Controller
     	DB::transaction(function() use($request){
 			$checkYear = date('Y');
 
+			$strSystemMaxDate = (date('Y') - 14).date('md');
+
+			$validatedData = $request->validate([
+				'name' => 'required|regex:/^[a-zA-Z ]+$/i',
+				'mobile' => 'required|digits:10',
+				'email' => 'required|unique:users,email',
+				'address' => 'required',
+				'gender' => 'required',
+				'dob' => 'required|before:'.$strSystemMaxDate,
+			]);
+
     	$student = User::where('usertype','Student')->orderBy('id','DESC')->first();
 
     	if ($student == null) {
@@ -122,6 +133,16 @@ public function StudentRegEdit($id){
 
 public function StudentRegUpdate(Request $request,$id){
     DB::transaction(function() use($request,$id){
+		
+		$strSystemMaxDate = (date('Y') - 14).date('md');
+		$validatedData = $request->validate([
+			'name' => 'required|regex:/^[a-zA-Z ]+$/i',
+			'mobile' => 'required|digits:10',
+			'email' => 'required|unique:users,email,'.$id,
+			'address' => 'required',
+			'gender' => 'required',
+			'dob' => 'required|before:'.$strSystemMaxDate,
+		]);
 
     $user = User::where('id',$id)->first();    	 
     $user->name = $request->name;
@@ -263,7 +284,7 @@ public function InvoiceReg($reg_id){
 
 
 public function AllRegView(){
-	$data['regs']= StudentReg::latest()->get();
+	$data['regs']= StudentReg::orderBy('created_at','DESC')->get();
 
 	return view('school.student.student_reg.view_all_reg',$data);
 }
@@ -284,4 +305,46 @@ return view('school.student.student_reg.view_student_class_list',$data);
     {
         return Excel::download(new TransactionExport, 'transactionlist.xlsx');
     }
+
+
+	public function EditTransaction($id){
+
+		$data['transaction'] = StudentReg::findOrFail($id);
+		$subject_id = StudentReg::findOrFail($id)->class->subject_id;
+		$today = StudentReg::findOrFail($id)->first()->created_at;
+		$data['subjects'] = StudentSubject::all();
+		$data['selectedClasses'] = StudentClass::where('subject_id',$subject_id)->get();
+		$data['vouchers'] = Coupon::where('status',1)->where('valid_from','<=',$today)->where('valid_to','>=',$today)->latest()->get();
+	
+		return view('school.student.student_reg.edit_student_class_reg',$data);
+	
+	}
+
+	public function UpdateTransaction(Request $request, $id){
+
+		$newReg = StudentReg::findOrFail($id);
+
+			$validatedData = $request->validate([
+				'payment' => 'required',
+				'reg_class_id' => 'required|unique:student_regs,class_id,'.$newReg->id.',id,student_id,'.$newReg->student_id,
+			]);
+		
+			$newReg->class_id = $request->reg_class_id;
+			$newReg->voucher_name = $request->reg_coupon_name;
+			$newReg->value = $request->reg_value;
+			$newReg->discount_amount = $request->reg_discount_amount;
+			$newReg->paid = $request->reg_paid;
+			$newReg->fee_amount = $request->reg_fee_amount;
+			$newReg->payment = $request->payment;
+
+			$newReg->save();
+
+			$data['detail'] = StudentReg::findOrFail($id)->first();
+			$pdf = PDF::loadView('school.student.student_reg.reg_confirm', $data);
+			$pdf->SetProtection(['copy', 'print'], '', 'pass');
+			return $pdf->stream('invoice.pdf');
+	
+	}
+
+
 }

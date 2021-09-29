@@ -159,7 +159,7 @@ Route::prefix('school/setup/class')->group(function(){
     Route::get('/delete/{id}',[StudentClassController::class, 'DeleteStudentClass'])->name('delete.class');
 
     Route::get('/add/generation', [StudentClassController::class, 'ClassGeneration'])->name('generate.class');
-
+    Route::get('/edit/regeneration/{id}', [StudentClassController::class, 'ClassRegeneration'])->name('regenerate.class');
 });
 
 // Subject
@@ -273,6 +273,12 @@ Route::prefix('students')->group(function(){
     Route::get('/reg/student/{id}', [StudentRegController::class, 'StudentClassRegAdd'])->name('add.student_class_reg');
     Route::get('/reg/student/subject/{subject_id}', [StudentRegController::class, 'GetClassReg'])->name('add.student_class_reg.get_class');
     Route::get('/reg/student/subject/class/{class_id}', [StudentRegController::class, 'GetTransaction'])->name('add.student_class_reg.get_transaction');
+    
+    Route::get('/reg/transaction/edit/{id}', [StudentRegController::class, 'EditTransaction'])->name('edit.transaction');
+    Route::post('/reg/transaction/edit/{id}', [StudentRegController::class, 'UpdateTransaction'])->name('update.transaction');
+
+    
+    
     Route::get('/reg/student/subject/class/voucher/{voucher_id}', [StudentRegController::class, 'GetVoucher']);
     Route::post('/reg/all/store}', [StudentRegController::class, 'AllRegStore'])->name('store.all.reg');
     Route::get('/reg/all/student/view', [StudentRegController::class, 'AllRegView'])->name('view.student_reg');

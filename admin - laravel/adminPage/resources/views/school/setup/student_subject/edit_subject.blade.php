@@ -29,7 +29,7 @@
                                     <form method="post" action="{{route('update.subject',$data->id)}}" enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-group">
-                                            <label class="info-title">Subject Name</label>
+                                            <label class="info-title">Subject Name <span class="text-danger">*</span></label>
                                             <input type="text" name="name" class="form-control input-default" value="{{$data->name}}">
                                             @error('name')
                                             <span class="text-danger">{{$message}}</span>
@@ -37,7 +37,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="info-title">Short Code</label>
+                                            <label class="info-title">Short Code <span class="text-danger">*</span></label>
                                             <input type="text" name="short_code" class="form-control input-default" value="{{$data->short_code}}">
                                             @error('short_code')
                                             <span class="text-danger">{{$message}}</span>
@@ -45,7 +45,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="info-title">Total Session</label>
+                                            <label class="info-title">Total Session <span class="text-danger">*</span></label>
                                             <input type="text" name="total_session" class="form-control input-default" value="{{$data->total_session}}">
                                             @error('total_session')
                                             <span class="text-danger">{{$message}}</span>

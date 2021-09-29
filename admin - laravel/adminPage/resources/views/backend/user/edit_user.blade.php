@@ -19,28 +19,37 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="name">User Name</label>
+                                            <label for="name">User Name <span class="text-danger">*</span></label>
                                             <input type="text" name="name" class="form-control input-default" value="{{$data->name}}">
                                         </div>
+                                        @error('name')
+                                                <span class="text-danger">{{$message}}</span>
+                                                @enderror
                                         </div>
                                         <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="email">Email</label>
+                                            <label for="email">Email <span class="text-danger">*</span></label>
                                             <input type="email" name="email" class="form-control input-default" value="{{$data->email}}">
                                         </div>
+                                        @error('email')
+                                                <span class="text-danger">{{$message}}</span>
+                                                @enderror
                                         </div>
                                         </div>
 
                                         <div class="row">
                                             <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="role">User Type</label>
+                                            <label for="role">User Type <span class="text-danger">*</span></label>
                                             <select name="usertype" class="form-control form-control-lg bg-secondary" id="">
                                                 <option value="Admin" {{$data->usertype=="Admin"?'selected':''}}>Admin</option>
                                                 <option value="Marketing" {{$data->usertype=="Marketing"?'selected':''}}>Marketing</option>
                                                 <option value="Teacher" {{$data->usertype=="Teacher"?'selected':''}}>Teacher</option>
                                                 <option value="OfficeAdmin" {{$data->usertype=="OfficeAdmin"?'selected':''}}>Office Admin</option>
-                                            </select>                                      
+                                            </select>     
+                                            @error('usertype')
+                                                <span class="text-danger">{{$message}}</span>
+                                                @enderror                                 
                                           </div>
                                         </div>
                                         <div class="col-md-6">

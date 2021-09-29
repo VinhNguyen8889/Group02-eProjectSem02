@@ -30,6 +30,17 @@ class AdminUserController extends Controller
     }
 
     public function UserProfileStore(Request $request){
+
+		$validatedData = $request->validate([
+    		'name' => 'required|regex:/^[a-zA-Z ]+$/i',
+			'mobile' => 'digits:10',
+			'email' => 'required|unique:users,email,'.Auth::user()->id,
+    		'address' => 'string|max:250',
+			'gender' => 'required',
+			'image' => 'file|image|mimes:jpeg,png,jpg|max:10240'
+    	]);
+
+
         $data = User::find(Auth::user()->id);
         $data->name = $request->name;
         $data->email = $request->email;
@@ -102,8 +113,8 @@ class AdminUserController extends Controller
     public function StoreUser(Request $request){
 
     	$validatedData = $request->validate([
-    		'email' => 'required|unique:users',
-    		'name' => 'required',
+    		'email' => 'required|unique:users,email',
+    		'name' => 'required|regex:/^[a-zA-Z ]+$/i',
             'usertype' => 'required',
     	]);
 
@@ -133,10 +144,16 @@ class AdminUserController extends Controller
 
     public function UpdateUser(Request $request, $id){
 
+        $validatedData = $request->validate([
+    		'email' => 'required|unique:users,email,'.$id,
+    		'name' => 'required|regex:/^[a-zA-Z ]+$/i',
+            'usertype' => 'required',
+    	]);
+
     	$data = User::findOrFail($id);
     	$data->name = $request->name;
     	$data->email = $request->email;
-        $data->role = $request->role;
+        $data->usertype = $request->usertype;
     	$data->save();
 
     	$notification = array(

@@ -19,13 +19,13 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="name">Student Name</label>
+                                            <label for="name">Student Name <span class="text-danger">*</span></label>
                                             <input type="text" name="name" class="form-control input-default lg bg-secondary" value="{{$student->name}}">
                                         </div>
                                         </div>
                                         <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="gender">Gender</label>
+                                            <label for="gender">Gender <span class="text-danger">*</span></label>
                                             <select class="form-control form-control-lg bg-secondary" name="gender">
                                             <option value="" selected="" disabled="">Please Select</option>
                                             <option value="Male" {{$student->gender=="Male"?"selected":""}}>Male</option>
@@ -35,7 +35,7 @@
                                         </div>
                                         <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="dob">DOB</label>
+                                            <label for="dob">DOB <span class="text-danger">*</span></label>
                                             <input type="date" name="dob" class="form-control bg-secondary input-default lg bg-secondary"value="{{$student->dob}}" >
                                         </div>
                                         </div>
@@ -44,19 +44,19 @@
                                         <div class="row">
                                         <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="mobile">Mobile</label>
+                                            <label for="mobile">Mobile <span class="text-danger">*</span></label>
                                             <input type="text" name="mobile" class="form-control input-default lg bg-secondary" value="{{$student->mobile}}">
                                         </div>
                                         </div>
                                         <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="address">Address</label>
+                                            <label for="address">Address <span class="text-danger">*</span></label>
                                             <input type="text" name="address" class="form-control input-default lg bg-secondary" value="{{$student->address}}">
                                         </div>
                                         </div>
                                         <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="address">Email</label>
+                                            <label for="address">Email <span class="text-danger">*</span></label>
                                             <input type="email" name="email" class="form-control input-default lg bg-secondary" value="{{$student->email}}">
                                         </div>
                                         </div>

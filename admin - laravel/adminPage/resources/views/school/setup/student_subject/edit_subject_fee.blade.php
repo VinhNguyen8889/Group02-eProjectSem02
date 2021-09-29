@@ -21,7 +21,7 @@
                             <div class="card-header">
                                 <h4 class="card-title">Update Fee Amount for <strong class="text-primary">{{$feeData->fee_subject->name}}</strong></h4>
                                 <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-                            <a href=""><button type="button" class="btn btn-secondary">Go Back</button></a>
+                            <a href="{{route('all.subject_fee',$feeData->subject_id)}}"><button type="button" class="btn btn-secondary">Go Back</button></a>
                     </div>
                             </div>
                             <div class="card-body">
@@ -31,7 +31,7 @@
                           
 
                                         <div class="form-group">
-                                            <label class="info-title">Fee Amount</label>
+                                            <label class="info-title">Fee Amount <span class="text-danger">*</span></label>
                                             <input type="number" name="fee_amount" class="form-control input-default" value="{{$feeData->fee_amount}}">
                                             @error('fee_amount')
                                             <span class="text-danger">{{$message}}</span>
@@ -39,7 +39,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="info-title">Effective Date</label>
+                                            <label class="info-title">Effective Date <span class="text-danger">*</span></label>
                                             <input type="date" name="effective_date" class="form-control input-default" value="{{$feeData->effective_date}}">
                                             @error('effective_date')
                                             <span class="text-danger">{{$message}}</span>

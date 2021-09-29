@@ -25,15 +25,15 @@
                                     <form method="post" action="{{route('password.update')}}">
                                         @csrf
                                         <div class="form-group">
-                                            <label class="info-title">Current Password</label>
+                                            <label class="info-title">Current Password <span class="text-danger">*</span></label>
                                             <input id="current_password" type="password" name="current_password" class="form-control input-default">
                                         </div>
                                         <div class="form-group">
-                                            <label class="info-title">New Password</label>
+                                            <label class="info-title">New Password <span class="text-danger">*</span></label>
                                             <input id="password" type="password" name="password" class="form-control input-default">
                                         </div>
                                         <div class="form-group">
-                                            <label class="info-title">Confirm Password</label>
+                                            <label class="info-title">Confirm Password <span class="text-danger">*</span></label>
                                             <input id="password_confirmation" type="password" name="password_confirmation" class="form-control input-default">
                                         </div>
 
