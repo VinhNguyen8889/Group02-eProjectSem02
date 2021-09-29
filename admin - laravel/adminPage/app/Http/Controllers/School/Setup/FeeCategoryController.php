@@ -61,7 +61,7 @@ class FeeCategoryController extends Controller
     	$data->save();
 
     	$notification = array(
-    		'message' => 'Student Shift Updated Successfully',
+    		'message' => 'Subject Fee Updated Successfully',
     		'alert-type' => 'success'
     	);
 

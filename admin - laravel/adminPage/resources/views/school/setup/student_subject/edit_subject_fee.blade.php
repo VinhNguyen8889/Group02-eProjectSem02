@@ -19,14 +19,14 @@
                 <!-- row -->
                 <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Update Fee Amount for <strong class="text-primary">AA</strong></h4>
+                                <h4 class="card-title">Update Fee Amount for <strong class="text-primary">{{$feeData->fee_subject->name}}</strong></h4>
                                 <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                             <a href=""><button type="button" class="btn btn-secondary">Go Back</button></a>
                     </div>
                             </div>
                             <div class="card-body">
                                 <div class="basic-form">
-                                    <form method="post" action="" enctype="multipart/form-data">
+                                    <form method="post" action="{{route('update.subject_fee',$feeData->id)}}" enctype="multipart/form-data">
                                         @csrf
                           
 

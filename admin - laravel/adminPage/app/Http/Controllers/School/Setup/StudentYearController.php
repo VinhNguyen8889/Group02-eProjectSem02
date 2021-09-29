@@ -9,7 +9,7 @@ use App\Models\StudentYear;
 class StudentYearController extends Controller
 {
         public function AllStudentYear(){
-    	$data['allData'] = StudentYear::all();
+    	$data['allData'] = StudentYear::orderBy('name','DESC')->get();
     	return view('school.setup.student_year.all_year',$data);
     }
 

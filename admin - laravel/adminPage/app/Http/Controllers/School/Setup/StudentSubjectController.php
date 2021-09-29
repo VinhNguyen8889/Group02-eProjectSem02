@@ -171,4 +171,28 @@ class StudentSubjectController extends Controller
 
     	return redirect()->route('all.subject_fee', $data->subject_id)->with($notification);
     }
+
+
+	public function UpdateFee(Request $request,$id){
+		
+		$fee = SubjectFeeLog::findOrFail($id);
+		$subject_id = $fee->fee_subject->id;
+		$validatedData = $request->validate([
+    		'fee_amount' => 'required|unique:student_subjects,short_code',
+			'effective_date' => 'required|unique:subject_fee_logs,effective_date,'.$fee->id.',id,subject_id,'.$subject_id
+    	]);
+
+		$fee->fee_amount = $request->fee_amount;
+		$fee->effective_date = date('Y-m-d',strtotime($request->effective_date));
+		$fee->save();
+
+    	$notification = array(
+    		'message' => 'Fee Amount has been updated Successfully',
+    		'alert-type' => 'success'
+    	);
+
+	
+
+    	return redirect()->route('all.subject_fee',$subject_id)->with($notification);
+	}
 }

@@ -174,6 +174,7 @@ Route::prefix('school/setup/subject')->group(function(){
     Route::get('/addfee/{id}',[StudentSubjectController::class, 'AddFee'])->name('add.subject_fee');
     Route::post('/storefee',[StudentSubjectController::class, 'StoreFee'])->name('store.subject_fee');
     Route::get('/editfee/{id}',[StudentSubjectController::class, 'EditFee'])->name('edit.subject_fee');
+    Route::post('/updatefee/{id}',[StudentSubjectController::class, 'UpdateFee'])->name('update.subject_fee');
     Route::get('/deletefee/{id}',[StudentSubjectController::class, 'DeleteFee'])->name('delete.subject_fee');
 });
 
