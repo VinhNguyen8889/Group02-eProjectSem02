@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 28, 2021 at 10:14 AM
+-- Generation Time: Sep 30, 2021 at 12:23 AM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 7.4.20
 
@@ -122,8 +122,8 @@ INSERT INTO `coupons` (`id`, `coupon_name`, `coupon_type`, `coupon_discount`, `v
 (1, 'HELLO1', 'value', 200, '2021-09-01', '2021-09-30', 0, NULL, '2021-09-19 21:12:11'),
 (2, 'MIDAUTUMN', 'value', 50, '2021-09-01', '2021-09-30', 1, NULL, '2021-09-20 22:45:52'),
 (3, 'HAPPYSMILE', 'percent', 0.1, '2021-09-01', '2021-09-15', 1, NULL, NULL),
-(6, 'FUTURE', 'percent', 0.8, '2021-09-01', '2021-09-30', 1, NULL, NULL),
-(7, 'TALENT', 'percent', 1, '2021-09-01', '2021-10-09', 1, NULL, NULL);
+(17, 'FUTURE', 'value', 100, '2021-10-01', '2021-10-09', 1, NULL, NULL),
+(18, 'TALENT', 'percent', 0.8, '2021-09-01', '2021-09-30', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -172,6 +172,34 @@ CREATE TABLE `employee_attendances` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `employee_attendances`
+--
+
+INSERT INTO `employee_attendances` (`id`, `employee_id`, `date`, `attend_status`, `created_at`, `updated_at`) VALUES
+(1, 35, '2021-09-29', 'Present', '2021-09-29 09:56:02', '2021-09-29 09:56:02'),
+(2, 36, '2021-09-29', 'Present', '2021-09-29 09:56:02', '2021-09-29 09:56:02'),
+(3, 35, '2021-09-01', 'Present', NULL, NULL),
+(4, 36, '2021-09-01', 'Present', NULL, NULL),
+(5, 35, '2021-09-02', 'Present', NULL, NULL),
+(6, 36, '2021-09-02', 'Present', NULL, NULL),
+(7, 35, '2021-09-03', 'Present', NULL, NULL),
+(8, 36, '2021-09-03', 'Present', NULL, NULL),
+(9, 35, '2021-09-04', 'Absent', NULL, NULL),
+(10, 36, '2021-09-04', 'Present', NULL, NULL),
+(11, 35, '2021-09-10', 'Present', NULL, NULL),
+(12, 36, '2021-09-10', 'Present', NULL, NULL),
+(13, 35, '2021-09-14', 'Present', NULL, NULL),
+(14, 36, '2021-09-14', 'Present', NULL, NULL),
+(15, 35, '2021-09-25', 'Present', NULL, NULL),
+(16, 36, '2021-09-25', 'Absent', NULL, NULL),
+(17, 35, '2021-09-26', 'Present', NULL, NULL),
+(18, 36, '2021-09-26', 'Present', NULL, NULL),
+(19, 35, '2021-09-27', 'Present', NULL, NULL),
+(20, 36, '2021-09-27', 'Present', NULL, NULL),
+(21, 35, '2021-09-28', 'Present', NULL, NULL),
+(22, 36, '2021-09-28', 'Present', NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -188,6 +216,18 @@ CREATE TABLE `employee_salary_logs` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `employee_salary_logs`
+--
+
+INSERT INTO `employee_salary_logs` (`id`, `employee_id`, `previous_salary`, `present_salary`, `increment_salary`, `effected_salary`, `created_at`, `updated_at`) VALUES
+(1, 35, 1000, 1000, 0, '2021-09-01', '2021-09-29 09:47:54', '2021-09-29 09:47:54'),
+(2, 36, 3000, 3000, 0, '2021-09-01', '2021-09-29 09:49:24', '2021-09-29 09:49:24'),
+(3, 35, 1000, 1200, 200, '2021-09-13', '2021-09-29 09:50:36', '2021-09-29 09:50:36'),
+(4, 36, 3000, 3200, 200, '2021-08-01', '2021-09-29 09:55:19', '2021-09-29 09:55:19'),
+(5, 36, 3000, 3400, 400, '2021-09-14', '2021-09-29 09:55:34', '2021-09-29 09:55:34'),
+(6, 37, 1000, 1000, 0, '2021-09-29', '2021-09-29 10:20:21', '2021-09-29 10:20:21');
 
 -- --------------------------------------------------------
 
@@ -317,6 +357,14 @@ CREATE TABLE `job_titles` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `job_titles`
+--
+
+INSERT INTO `job_titles` (`id`, `name`, `basic_salary`, `created_at`, `updated_at`) VALUES
+(1, 'Teacher', 1000, '2021-09-29 09:44:19', '2021-09-29 09:44:19'),
+(2, 'Principle', 3000, '2021-09-29 09:44:42', '2021-09-29 09:44:55');
+
 -- --------------------------------------------------------
 
 --
@@ -330,6 +378,14 @@ CREATE TABLE `level_teachers` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `level_teachers`
+--
+
+INSERT INTO `level_teachers` (`id`, `name`, `increment_salary`, `created_at`, `updated_at`) VALUES
+(1, 1, 200, '2021-09-29 09:45:20', '2021-09-29 09:45:20'),
+(2, 2, 400, '2021-09-29 09:45:54', '2021-09-29 09:45:54');
 
 -- --------------------------------------------------------
 
@@ -481,8 +537,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('B8p3PgFtCPBGX1ieh0atPY0A83xbhRDNIV9ERh6f', 30, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36 Edg/93.0.961.52', 'YTo3OntzOjM6InVybCI7YTowOnt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zdHVkZW50cy9tYW5hZ2VtZW50L3N0dWRlbnQvY2xhc3MiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjY6Il90b2tlbiI7czo0MDoiczFMTHlaSlJmcVFZbjBMNUJRVkd2WlFueVJtdUtMMEFCbkRKbW1zZCI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MzA7czoxNzoicGFzc3dvcmRfaGFzaF93ZWIiO3M6NjA6IiQyeSQxMCRMdXF6a2dDc0NmTnZ2YUdHUDlSRGdPWGU3Q3RVSDhPNDRLdTlCLnNlMzBRV29vQVh1UFg0dSI7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkTHVxemtnQ3NDZk52dmFHR1A5UkRnT1hlN0N0VUg4TzQ0S3U5Qi5zZTMwUVdvb0FYdVBYNHUiO30=', 1632806377),
-('JbcpkARQoFNaKZ8NF3YMDZBVmDJ7TSaNzSSvfgjw', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiSTlxc1BCWVBsRGxUQmc3SlVTR2hJbmsyRjZDSXlGemFZamk2ck54UiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zdHVkZW50cy9tYW5hZ2VtZW50L3N0dWRlbnRsaXN0L2NsYXNzLzUiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MTc6InBhc3N3b3JkX2hhc2hfd2ViIjtzOjYwOiIkMnkkMTAkUFVPUGtLNjhjb285NWF0dkFnWFQwT1hETWs3U202QW1DcjlxblJsdVFzb1E0SmJOaXg1cFciO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJFBVT1BrSzY4Y29vOTVhdHZBZ1hUME9YRE1rN1NtNkFtQ3I5cW5SbHVRc29RNEpiTml4NXBXIjt9', 1632816127);
+('CWG825ULpGrLxc3wpRaaO8zAv51VQ2wJkduhrZxl', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiWERCOUI5OWJEOGNUdEgwTFlkcUZMWVlWY01jR0FLdlBuc0Rwek5HTiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Njk6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zdHVkZW50cy9tYW5hZ2VtZW50L3JlZy9jbGFzcy9zdHVkZW50L2V4cG9ydC8xMiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoxNzoicGFzc3dvcmRfaGFzaF93ZWIiO3M6NjA6IiQyeSQxMCRQVU9Qa0s2OGNvbzk1YXR2QWdYVDBPWERNazdTbTZBbUNyOXFuUmx1UXNvUTRKYk5peDVwVyI7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkUFVPUGtLNjhjb285NWF0dkFnWFQwT1hETWs3U202QW1DcjlxblJsdVFzb1E0SmJOaXg1cFciO30=', 1632954155);
 
 -- --------------------------------------------------------
 
@@ -510,8 +565,12 @@ CREATE TABLE `student_classes` (
 --
 
 INSERT INTO `student_classes` (`id`, `name`, `teacher_id`, `year_id`, `group_id`, `subject_id`, `day_id`, `shift_id`, `planned_start_date`, `applied_fee`, `created_at`, `updated_at`) VALUES
-(1, 'SE_DW_M0_0921', 23, 4, 1, 2, 1, 1, '2021-09-30', 250, '2021-09-18 03:13:29', '2021-09-18 03:13:29'),
-(5, 'SE_DW_E1_0921', 23, 5, 1, 2, 2, 3, '2021-09-30', 200, '2021-09-20 09:09:02', '2021-09-20 09:09:02');
+(1, 'SE_DW_M0_0921', 35, 4, 1, 2, 1, 1, '2021-09-30', 250, '2021-09-18 03:13:29', '2021-09-18 03:13:29'),
+(5, 'SE_DW_E1_0921', 36, 5, 1, 2, 2, 3, '2021-09-30', 200, '2021-09-20 09:09:02', '2021-09-20 09:09:02'),
+(7, 'DN_AI_M0_1021', 35, 5, 5, 4, 1, 1, '2021-10-01', 330, '2021-09-29 08:22:17', '2021-09-29 08:22:17'),
+(9, 'DS_TB_A0_1021', 36, 5, 3, 5, 1, 2, '2021-10-02', 350, '2021-09-29 11:16:18', '2021-09-29 11:17:12'),
+(11, 'DS_RS_A0_1021', 36, 5, 3, 7, 1, 2, '2021-10-10', 400, '2021-09-29 15:20:15', '2021-09-29 15:20:15'),
+(12, 'DS_DM_M0_1021', 35, 5, 3, 3, 1, 1, '2021-10-05', 250, '2021-09-29 15:20:39', '2021-09-29 15:20:39');
 
 -- --------------------------------------------------------
 
@@ -582,7 +641,8 @@ CREATE TABLE `student_groups` (
 INSERT INTO `student_groups` (`id`, `name`, `short_code`, `created_at`, `updated_at`) VALUES
 (1, 'Software Engineering', 'SE', '2021-09-16 06:52:33', '2021-09-16 06:52:33'),
 (2, 'Marketing', 'MKT', '2021-09-16 06:53:25', '2021-09-16 06:53:25'),
-(3, 'Data Science', 'DS', '2021-09-16 06:54:05', '2021-09-16 06:54:05');
+(3, 'Data Science', 'DS', '2021-09-16 06:54:05', '2021-09-16 06:54:05'),
+(5, 'Design', 'DN', '2021-09-29 07:46:41', '2021-09-29 07:46:41');
 
 -- --------------------------------------------------------
 
@@ -611,8 +671,13 @@ CREATE TABLE `student_regs` (
 --
 
 INSERT INTO `student_regs` (`id`, `student_id`, `class_id`, `mark`, `voucher_name`, `value`, `fee_amount`, `discount_amount`, `paid`, `payment`, `created_at`, `updated_at`, `id_no`) VALUES
-(4, 30, 1, 8.00, 'TALENT', '-100%', 250.00, 250.00, 0.00, 'transfer', '2021-09-22 21:59:08', '2021-09-24 06:40:59', 2021090004),
-(48, 30, 5, 7.50, 'MIDAUTUMN', '-50', 200.00, 50.00, 150.00, 'transfer', '2021-09-27 09:15:20', '2021-09-28 01:02:07', 2021090005);
+(48, 30, 1, 7.50, NULL, NULL, 250.00, NULL, 250.00, 'cash', '2021-09-27 09:15:20', '2021-09-29 15:08:48', 2021090005),
+(49, 25, 7, 10.00, 'MIDAUTUMN', '-50', 330.00, 50.00, 280.00, 'transfer', '2021-09-29 11:54:15', '2021-09-29 11:55:10', 2021090006),
+(50, 25, 5, NULL, 'MIDAUTUMN', '-50', 200.00, 50.00, 150.00, 'transfer', '2021-09-29 12:18:51', '2021-09-29 12:18:51', 2021090007),
+(51, 40, 7, NULL, 'MIDAUTUMN', '-50', 330.00, 50.00, 280.00, 'cash', '2021-09-29 15:19:22', '2021-09-29 15:19:22', 2021090008),
+(52, 40, 12, NULL, 'MIDAUTUMN', '-50', 250.00, 50.00, 200.00, 'transfer', '2021-09-29 15:21:28', '2021-09-29 15:21:28', 2021090009),
+(53, 26, 12, NULL, 'MIDAUTUMN', '-50', 250.00, 50.00, 200.00, 'visamaster', '2021-09-29 15:21:43', '2021-09-29 15:21:43', 2021090010),
+(54, 25, 12, NULL, 'MIDAUTUMN', '-50', 250.00, 50.00, 200.00, 'cash', '2021-09-29 15:22:04', '2021-09-29 15:22:04', 2021090011);
 
 -- --------------------------------------------------------
 
@@ -658,7 +723,10 @@ CREATE TABLE `student_subjects` (
 
 INSERT INTO `student_subjects` (`id`, `name`, `short_code`, `total_session`, `created_at`, `updated_at`) VALUES
 (2, 'Dynamic Website', 'DW', 16, '2021-09-17 17:17:51', '2021-09-17 17:19:20'),
-(3, 'Data Management', 'DM', 20, '2021-09-17 17:20:53', '2021-09-17 17:20:53');
+(3, 'Data Management', 'DM', 20, '2021-09-17 17:20:53', '2021-09-17 17:20:53'),
+(4, 'Adobe Illustration', 'AI', 18, '2021-09-29 07:48:04', '2021-09-29 07:48:04'),
+(5, 'Tableau', 'TB', 18, '2021-09-29 07:48:59', '2021-09-29 07:48:59'),
+(7, 'R Studio', 'RS', 16, '2021-09-29 15:16:39', '2021-09-29 15:16:39');
 
 -- --------------------------------------------------------
 
@@ -707,7 +775,12 @@ INSERT INTO `subject_fee_logs` (`id`, `subject_id`, `fee_amount`, `effective_dat
 (1, 2, 150, '2021-09-01', '2021-09-17 17:17:51', '2021-09-17 17:17:51'),
 (2, 2, 200, '2021-09-30', '2021-09-17 17:18:43', '2021-09-17 17:18:43'),
 (3, 3, 250, '2021-09-25', '2021-09-17 17:20:53', '2021-09-17 17:20:53'),
-(4, 2, 300, '2021-11-01', '2021-09-21 21:14:03', '2021-09-21 21:14:03');
+(4, 2, 300, '2021-11-01', '2021-09-21 21:14:03', '2021-09-21 21:14:03'),
+(5, 4, 330, '2021-09-15', '2021-09-29 07:48:04', '2021-09-29 08:15:11'),
+(6, 5, 350, '2021-10-01', '2021-09-29 07:48:59', '2021-09-29 07:48:59'),
+(7, 5, 300, '2021-09-01', '2021-09-29 07:49:44', '2021-09-29 07:49:44'),
+(8, 4, 320, '2021-09-01', '2021-09-29 07:50:21', '2021-09-29 08:10:31'),
+(11, 7, 400, '2021-09-01', '2021-09-29 15:16:39', '2021-09-29 15:16:39');
 
 -- --------------------------------------------------------
 
@@ -749,17 +822,19 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `usertype`, `name`, `email`, `email_verified_at`, `password`, `mobile`, `address`, `gender`, `image`, `fname`, `mname`, `religion`, `id_no`, `dob`, `code`, `role`, `join_date`, `designation_id`, `salary`, `status`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'Vinh N', 'vinh@gmail.com', NULL, '$2y$10$PUOPkK68coo95atvAgXT0OXDMk7Sm6AmCr9qnRluQsoQ4JbNix5pW', '124214214', '16 nguyễn thị minh khai q1', 'Male', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Admin', NULL, NULL, NULL, 1, NULL, NULL, '202109271642face.png', NULL, '2021-09-27 09:43:11'),
+(1, 'Admin', 'Vinh Nguyen', 'vinh@gmail.com', NULL, '$2y$10$PUOPkK68coo95atvAgXT0OXDMk7Sm6AmCr9qnRluQsoQ4JbNix5pW', '0913134441', '16 nguyễn thị minh khai q1', 'Male', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Admin', NULL, NULL, NULL, 1, NULL, NULL, '202109291442face.png', NULL, '2021-09-29 12:59:18'),
 (4, 'Admin', 'tamie', 'tamie@gmail.com', NULL, '$2y$10$xCX85vTXHfWxAvh5hHD2uunDWwvwXYVNxgRV7o82QxgWrdYL01m6G', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '9577', 'Sales_Marketing', NULL, NULL, NULL, 1, NULL, NULL, NULL, '2021-09-14 02:24:34', '2021-09-14 02:24:34'),
-(23, 'Teacher', 'David', 'david@gmail.com', NULL, '$2y$10$x0FwxN6e.rPE6xmmBBpOsu/mFl5FkOOv26bWfo.bK1.nG0qScyMOS', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '9577', 'Teacher', NULL, NULL, NULL, 1, NULL, NULL, NULL, '2021-09-14 02:24:34', '2021-09-14 02:24:34'),
-(24, 'Teacher', 'Alex', 'alex@gmail.com', NULL, '$2y$10$x0FwxN6e.rPE6xmmBBpOsu/mFl5FkOOv26bWfo.bK1.nG0qScyMOS', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '9577', 'Teacher', NULL, NULL, NULL, 1, NULL, NULL, NULL, '2021-09-14 02:24:34', '2021-09-14 02:24:34'),
-(25, 'Student', 'xuyen', 'xuyen@gmai.com', NULL, '$2y$10$WFB9TBZ4FDIrfRnKkJEK8uXW0h/V5MD9zvn9N2XXtno/7ndmmZLD.', '1244211414', '123 abc', 'Male', NULL, NULL, NULL, NULL, '20210022', '1988-08-01', 'Welcome19880801', 'Student', NULL, NULL, NULL, 1, NULL, NULL, NULL, '2021-09-19 04:08:05', '2021-09-19 04:08:05'),
+(25, 'Student', 'xuyen', 'xuyen@gmai.com', NULL, '$2y$10$PUOPkK68coo95atvAgXT0OXDMk7Sm6AmCr9qnRluQsoQ4JbNix5pW', '1244211414', '123 abc', 'Male', NULL, NULL, NULL, NULL, '20210022', '1988-08-01', 'Welcome19880801', 'Student', NULL, NULL, NULL, 1, NULL, NULL, NULL, '2021-09-19 04:08:05', '2021-09-19 04:08:05'),
 (26, 'Student', 'phuc vu', 'phucvu@gmail.com', NULL, '$2y$10$x0FwxN6e.rPE6xmmBBpOsu/mFl5FkOOv26bWfo.bK1.nG0qScyMOS', '1112334', '456 abc', 'Male', NULL, NULL, NULL, NULL, '20210026', '1988-08-23', 'Welcome19880801', 'Student', NULL, NULL, NULL, 1, NULL, NULL, '202109231850face.png', '2021-09-19 04:41:05', '2021-09-23 11:50:28'),
 (30, 'Student', 'huyen', 'huyen@gmail.com', NULL, '$2y$10$LuqzkgCsCfNvvaGGP9RDgOXe7CtUH8O44Ku9B.se30QWooAXuPX4u', '12414', '32523 dfsf', 'Female', NULL, NULL, NULL, NULL, '20210027', '2010-02-22', 'Welcome20100222', 'Student', NULL, NULL, NULL, 1, NULL, NULL, NULL, '2021-09-22 09:20:04', '2021-09-22 09:20:04'),
-(31, 'Student', 'tuyet', 'tuyet@gmail.com', NULL, '$2y$10$7pl70DE4yg1DAOE0whb/qesBRL/9ZYSvR097vyBSQaSF3rMESLBhO', '2124214', '12421 wdadawd', 'Female', NULL, NULL, NULL, NULL, '20210028', '2009-02-22', 'Welcome20090222', 'Student', NULL, NULL, NULL, 1, NULL, NULL, NULL, '2021-09-22 09:24:07', '2021-09-22 09:24:07'),
 (32, 'Admin', 'huan', 'huan@gmail.com', NULL, '$2y$10$rNjPri2ufLaUJwgLIfwi/.FVsNZ3F0nCxoEFLAXwYQKl5Uf7ViL7S', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '7677', 'Sale_Marketing', NULL, NULL, NULL, 1, NULL, NULL, NULL, '2021-09-24 06:12:46', '2021-09-24 06:12:46'),
 (33, 'Marketing', 'John Do', 'john@gmail.com', NULL, '$2y$10$l5WXQO3NQx4N6vddGcphiewV1cB5dJgGHGw18LkyRE1JVzlmLBHkK', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '3633', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, '2021-09-27 09:55:44', '2021-09-27 09:55:44'),
-(34, 'OfficeAdmin', 'Khoa Le', 'khoa@gmail.com', NULL, '$2y$10$tyFq2lUpipncQxTUd2NOVuDSZMLTCucy6Yr3Yq59kjs21FEb2.36q', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '555', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, '2021-09-27 10:04:15', '2021-09-27 10:04:15');
+(34, 'OfficeAdmin', 'Khoa Le', 'khoa@gmail.com', NULL, '$2y$10$tyFq2lUpipncQxTUd2NOVuDSZMLTCucy6Yr3Yq59kjs21FEb2.36q', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '555', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, '2021-09-27 10:04:15', '2021-09-27 10:04:15'),
+(35, 'Teacher', 'Henry Vu', 'henry@gmail.com', NULL, '$2y$10$vzxclR8xE1tnj1YgVBT.H.3RhklDWxnE3HHmzQUcrCQBAjfgsubkS', '0939437460', 'Boston, USA', 'Male', '202109291647face.png', NULL, NULL, '1', 'T.202109.0001', '1991-10-25', '3277', 'Teacher', '2021-09-01', 1, 1000, 1, NULL, NULL, NULL, '2021-09-29 09:47:54', '2021-09-29 09:54:19'),
+(36, 'Teacher', 'Kelly Le', 'kelly@gmail.com', NULL, '$2y$10$CSfC1djzBlL3pWs9bsFZfO9eQF5.99u/s67fka/Xx6yTcgxGvqz.m', '0935553247', 'Boston, USA', 'Female', '202109291649face.png', NULL, NULL, '2', 'P.202109.0036', '1995-02-14', '4519', 'Teacher', '2021-09-01', 2, 3000, 1, NULL, NULL, NULL, '2021-09-29 09:49:24', '2021-09-29 09:55:34'),
+(37, 'Teacher', 'Vinh Nguyen', 'nguyenhuynhquangvinh@gmail.com', NULL, '$2y$10$mE27rqlk1WuFPRuVKMX6B.UmzJb7Mt8Fn51h3RWK4iZp53hsyQPhK', '1234567891', '16 nguyễn thị minh khai q1', 'Male', '202109291720face.png', '', '', '0', 'T.202109.0025', '2002-01-30', '6877', 'Teacher', '2021-09-29', 1, 1000, 1, NULL, NULL, NULL, '2021-09-29 10:20:21', '2021-09-29 10:20:21'),
+(38, 'Admin', 'Dung Tran', 'dung@gmail.com', NULL, '$2y$10$wo5.PDK71TEsczT6thrWj.U7yBFhYrRUDrXdhOrOqdL7v5q2WECaS', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1380', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, '2021-09-29 12:53:41', '2021-09-29 12:58:01'),
+(40, 'Student', 'Tai Vu', 'tai@gmail.com', NULL, '$2y$10$IoCKQwR7Zu39uhtxeC4S2uoaL.ML4cQwiEYrCM14VtzCyZUDIrGym', '4748484721', '213 ngo quyen', 'Male', NULL, NULL, NULL, NULL, '20210028', '1999-06-23', 'Welcome19990623', 'Student', NULL, NULL, NULL, 1, NULL, NULL, NULL, '2021-09-29 15:19:01', '2021-09-29 15:19:01');
 
 --
 -- Indexes for dumped tables
@@ -999,7 +1074,7 @@ ALTER TABLE `contacts`
 -- AUTO_INCREMENT for table `coupons`
 --
 ALTER TABLE `coupons`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `courses`
@@ -1011,13 +1086,13 @@ ALTER TABLE `courses`
 -- AUTO_INCREMENT for table `employee_attendances`
 --
 ALTER TABLE `employee_attendances`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `employee_salary_logs`
 --
 ALTER TABLE `employee_salary_logs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `exam_types`
@@ -1053,13 +1128,13 @@ ALTER TABLE `information`
 -- AUTO_INCREMENT for table `job_titles`
 --
 ALTER TABLE `job_titles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `level_teachers`
 --
 ALTER TABLE `level_teachers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -1089,7 +1164,7 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT for table `student_classes`
 --
 ALTER TABLE `student_classes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `student_days`
@@ -1107,13 +1182,13 @@ ALTER TABLE `student_discounts`
 -- AUTO_INCREMENT for table `student_groups`
 --
 ALTER TABLE `student_groups`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `student_regs`
 --
 ALTER TABLE `student_regs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `student_shifts`
@@ -1125,7 +1200,7 @@ ALTER TABLE `student_shifts`
 -- AUTO_INCREMENT for table `student_subjects`
 --
 ALTER TABLE `student_subjects`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `student_years`
@@ -1137,13 +1212,13 @@ ALTER TABLE `student_years`
 -- AUTO_INCREMENT for table `subject_fee_logs`
 --
 ALTER TABLE `subject_fee_logs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- Constraints for dumped tables
