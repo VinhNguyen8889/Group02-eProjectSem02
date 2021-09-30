@@ -38,23 +38,13 @@
                         <input type="password" id="password" name="password"class="form-control">
                     </div>
                     <div class="form-row d-flex justify-content-between mt-4 mb-2">
-                        <div class="form-group">
-                            <div class="custom-control custom-checkbox ml-1">
-                                <input type="checkbox" class="custom-control-input" id="basic_checkbox_1">
-                                <label class="custom-control-label" for="basic_checkbox_1">{{ __('Remember me') }}</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <a href="page-forgot-password.html">Forgot Password?</a>
-                        </div>
+
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary btn-block">Sign Me In</button>
                     </div>
                                     </form>
-                                    <div class="new-account mt-3">
-                                        <p>Don't have an account? <a class="text-primary" href="{{route('register')}}">Sign up</a></p>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
